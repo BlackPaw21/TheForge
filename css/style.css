@@ -149,32 +149,36 @@ body.clicking #custom-cursor img {
   margin-bottom: 40px;
   text-shadow: 0 0 10px #0f9;
 }
+/* Projects wrapper as a responsive grid */
 .projects-wrapper {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;  /* one column on mobile */
   gap: 40px;
-  justify-content: center;
   padding: 0 20px;
 }
-.project-column { flex: 1; min-width: 280px; }
-.project-column h3 {
-  text-align: center;
-  font-size: 2em;
-  margin-bottom: 20px;
-  color: #0f9;
+
+/* Two columns side by side from 768px up */
+@media (min-width: 768px) {
+  .projects-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-/* Default: one column on mobile */
+/* Ensure each column spans its grid cell */
+.project-column {
+  width: 100%;
+}
+
+/* Inside each column, your project-grid already handles individual cards */
 .project-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr;  /* one card per row on mobile */
   gap: 20px;
 }
 
-/* Two columns from 600px and up */
 @media (min-width: 600px) {
   .project-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);  /* two cards per row on tablet+ */
   }
 }
 
