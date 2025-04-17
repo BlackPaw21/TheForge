@@ -101,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const projects = [
     { title: 'RevChat',    description: 'A real-time communication chat application with a secret reverse shell.', url: 'https://github.com/wise02/RevChat',    platform: 'W' },
     { title: 'ZipCracker', description: 'A powerful script to brute force your way into any password protected zip or rar.', url: 'https://github.com/Wise02/ZipCracker', platform: 'W' },
-    { title: 'Bundler', description: 'a quick and easy tool to make a bundle of links for easy sharing.', url: 'https://github.com/Wise02/Bundler', platform: 'W' },
     { title: 'PlaceHolder',description: 'A placeholder for my next project.',                                          url: 'https://github.com/wise02/PlaceHolder', platform: 'L' }
   ];
   const wGrid = document.querySelector('#windows-projects .project-grid');
@@ -147,6 +146,45 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 3000);
     }
   });
+
+  // Back to Top button logic (50% of first section threshold)
+const backBtn = document.getElementById('back-to-top');
+const heroSection = document.getElementById('home');
+let isVisible = false;
+
+// compute threshold once (half of hero height)
+const threshold = heroSection.offsetHeight * 0.5;
+
+window.addEventListener('scroll', () => {
+  const pastThreshold = window.scrollY > threshold;
+  if (pastThreshold && !isVisible) {
+    // pop in
+    backBtn.style.display = 'flex';
+    backBtn.classList.remove('hide');
+    backBtn.classList.add('show');
+    isVisible = true;
+  } 
+  else if (!pastThreshold && isVisible) {
+    // pop out
+    backBtn.classList.remove('show');
+    backBtn.classList.add('hide');
+    isVisible = false;
+  }
+});
+
+// after jumpOut animation, hide and reset
+backBtn.addEventListener('animationend', e => {
+  if (e.animationName === 'jumpOut') {
+    backBtn.style.display = 'none';
+    backBtn.classList.remove('hide');
+  }
+});
+
+// click to scroll up
+backBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 
   // 9) Mobile: override About‑Me link to scroll to footer
   const aboutBtn = document.querySelector('a[href="#about"]');
