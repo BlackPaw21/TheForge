@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
   resizeCanvas();
   draw();
 
-  // 6) Generate project cards
+  // 6) Generate project cards.
   const projects = [
     { title: 'RevChat',    description: 'A real-time communication chat application with a secret reverse shell.', url: 'https://github.com/wise02/RevChat',    platform: 'W' },
     { title: 'ZipCracker', description: 'A powerful script to brute force your way into any password protected zip or rar.', url: 'https://github.com/Wise02/ZipCracker', platform: 'W' },
