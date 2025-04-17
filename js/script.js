@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const projects = [
     { title: 'RevChat',    description: 'A real-time communication chat application with a secret reverse shell.', url: 'https://github.com/wise02/RevChat',    platform: 'W' },
     { title: 'ZipCracker', description: 'A powerful script to brute force your way into any password protected zip or rar.', url: 'https://github.com/Wise02/ZipCracker', platform: 'W' },
-    { title: 'Bundler', description: 'A powerful script to brute force your way into any password protected zip or rar.', url: 'https://github.com/BlackPaw21/Bundler', platform: 'W' },
+    { title: 'Bundler', description: 'A universal link bundler for everyday use.', url: 'https://github.com/BlackPaw21/Bundler', platform: 'W' },
     { title: 'PlaceHolder',description: 'A placeholder for my next project.',                                          url: 'https://github.com/BlackPaw21/', platform: 'L' }
   ];
   const wGrid = document.querySelector('#windows-projects .project-grid');
