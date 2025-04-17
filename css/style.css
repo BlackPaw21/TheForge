@@ -31,7 +31,7 @@ body {
   top: 0;
   left: 0;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 10002;
 }
 #custom-cursor img {
   width: 32px;
@@ -163,11 +163,21 @@ body.clicking #custom-cursor img {
   margin-bottom: 20px;
   color: #0f9;
 }
+
+/* Default: one column on mobile */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  grid-template-columns: 1fr;
   gap: 20px;
 }
+
+/* Two columns from 600px and up */
+@media (min-width: 600px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .project-card {
   background: #2b2b2b;
   border: 2px solid #0f9;
@@ -253,6 +263,68 @@ body.clicking #custom-cursor img {
 #tap-counter.fade-out {
   opacity: 0;
 }
+
+/* Jump‑in keyframes */
+@keyframes jumpIn {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Jump‑out keyframes */
+@keyframes jumpOut {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+}
+
+/* Back to Top button base */
+#back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  background: #0faa86;
+  border: none;
+  border-radius: 50%;
+  display: none;             /* hidden by default */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10001;
+  /* start off-screen */
+  transform: translateY(100px);
+  opacity: 0;
+}
+
+/* When showing, run jumpIn */
+#back-to-top.show {
+  display: flex;
+  animation: jumpIn 0.5s ease-out forwards;
+}
+
+/* When hiding, run jumpOut */
+#back-to-top.hide {
+  display: flex;             /* keep visible during animation */
+  animation: jumpOut 0.5s ease-in forwards;
+}
+
+/* Hover state */
+#back-to-top:hover {
+  background: #0df5a1;
+}
+
 
 /* Footer */
 footer {
