@@ -191,7 +191,7 @@ body.clicking #custom-cursor img {
   gap: 20px;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1100px) {
   .project-grid {
     grid-template-columns: repeat(2, 1fr);  /* two cards per row on tablet+ */
   }
