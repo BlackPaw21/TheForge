@@ -356,12 +356,12 @@ footer {
 
 /* Add to your style.css */
 .footer-link {
-  color: #0faa86;
+  color: #aa0f0f;
   text-decoration: none;
   transition: color 0.3s;
 }
 .footer-link:hover {
-  color: #0faa86;
+  color: #aa0f0f;
 }
 
 
