@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { title: 'Bundler', description: 'A universal link bundler for everyday use.', url: 'https://github.com/BlackPaw21/Bundler', platform: 'W' },
     { title: 'RevChat',    description: 'A real-time communication chat application with a secret reverse shell.', url: 'https://github.com/wise02/RevChat',    platform: 'W' },
     { title: 'ZipCracker', description: 'A powerful script to brute force your way into any password protected zip or rar.', url: 'https://github.com/Wise02/ZipCracker', platform: 'W' },
+    { title: 'HellCat', description: 'An easy to use wrapper for HashCat for windows.', url: 'https://github.com/BlackPaw21/HellCat', platform: 'W' },
     { title: 'KaliQuickFix',description: 'never have to type --fix-missing or --break-system-packages again!.', url: 'https://github.com/BlackPaw21/KaliQuickFix', platform: 'L' },
     { title: 'TheListener',description: 'a strong MITM attack that will reveal HTTP/HTTPS request on the connected network.', url: 'https://github.com/BlackPaw21/TheListener', platform: 'L' }
   ];
