@@ -1,7 +1,14 @@
 // ===================================
+// THEFORGE - ULTIMATE JAVASCRIPT
+// Advanced Interactive Features
+// ===================================
+
+// ===================================
 // INITIALIZATION
 // ===================================
 document.addEventListener('DOMContentLoaded', () => {
+  initLoadingScreen();
+  initScrollProgress();
   initCustomCursor();
   initHeroAnimations();
   initTypingEffect();
@@ -11,10 +18,51 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
   initLogoTapCounter();
   initScrollAnimations();
+  initAnimatedCounters();
+  initSkillBars();
 });
 
 // ===================================
-// 0) CUSTOM CURSOR
+// LOADING SCREEN
+// ===================================
+function initLoadingScreen() {
+  const loadingScreen = document.getElementById('loading-screen');
+  const loadingBar = document.querySelector('.loading-bar-fill');
+  const loadingPercent = document.querySelector('.loading-percent');
+
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += Math.random() * 15;
+    if (progress > 100) progress = 100;
+
+    loadingBar.style.width = `${progress}%`;
+    loadingPercent.textContent = `${Math.floor(progress)}%`;
+
+    if (progress === 100) {
+      clearInterval(interval);
+      setTimeout(() => {
+        loadingScreen.classList.add('loaded');
+        document.body.classList.add('loaded');
+      }, 500);
+    }
+  }, 150);
+}
+
+// ===================================
+// SCROLL PROGRESS BAR
+// ===================================
+function initScrollProgress() {
+  const progressBar = document.querySelector('.scroll-progress-bar');
+
+  window.addEventListener('scroll', () => {
+    const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = (window.scrollY / windowHeight) * 100;
+    progressBar.style.width = `${scrolled}%`;
+  });
+}
+
+// ===================================
+// CUSTOM CURSOR
 // ===================================
 function initCustomCursor() {
   const customCursor = document.createElement('div');
@@ -25,39 +73,56 @@ function initCustomCursor() {
   customCursor.appendChild(cursorImg);
   document.body.appendChild(customCursor);
 
-  // Follow mouse movement
-  document.addEventListener('mousemove', e => {
-    customCursor.style.left = `${e.clientX}px`;
-    customCursor.style.top = `${e.clientY}px`;
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
+  const speed = 0.15;
+
+  // Smooth cursor following
+  function animateCursor() {
+    const distX = mouseX - cursorX;
+    const distY = mouseY - cursorY;
+
+    cursorX += distX * speed;
+    cursorY += distY * speed;
+
+    customCursor.style.left = `${cursorX}px`;
+    customCursor.style.top = `${cursorY}px`;
+
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
   });
 
   // Glow effect on click
-  document.addEventListener('mousedown', e => {
+  document.addEventListener('mousedown', (e) => {
     if (e.button === 1) { e.preventDefault(); return; }
     document.body.classList.add('clicking');
   });
 
-  document.addEventListener('mouseup', e => {
+  document.addEventListener('mouseup', (e) => {
     if (e.button === 1) { e.preventDefault(); return; }
     document.body.classList.remove('clicking');
   });
 
-  // Prevent middle-click
-  window.addEventListener('auxclick', e => {
+  window.addEventListener('auxclick', (e) => {
     if (e.button === 1) e.preventDefault();
   });
 }
 
 // ===================================
-// 1) HERO ANIMATIONS
+// HERO ANIMATIONS
 // ===================================
 function initHeroAnimations() {
-  // Trigger fade-in animations
-  document.body.classList.add('loaded');
+  // Animations triggered by loading screen
+  // Body already has 'loaded' class added
 }
 
 // ===================================
-// 2) TYPING EFFECT
+// TYPING EFFECT
 // ===================================
 function initTypingEffect() {
   const text = '| Linux Tools | Windows Tools | Offensive Security |';
@@ -69,11 +134,11 @@ function initTypingEffect() {
       heroTextEl.textContent += text.charAt(idx++);
       setTimeout(type, 35);
     }
-  }, 500);
+  }, 800);
 }
 
 // ===================================
-// 3) PARTICLE BACKGROUND
+// PARTICLE BACKGROUND
 // ===================================
 function initParticleBackground() {
   const canvas = document.getElementById('particles');
@@ -152,13 +217,13 @@ function initParticleBackground() {
     }
   });
 
-  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('resize', debounce(resizeCanvas, 250));
   resizeCanvas();
   draw();
 }
 
 // ===================================
-// 4) NAVIGATION
+// NAVIGATION
 // ===================================
 function initNavigation() {
   const navToggle = document.getElementById('nav-toggle');
@@ -194,15 +259,14 @@ function initNavigation() {
     });
   });
 
-  // Add active class to current section
-  window.addEventListener('scroll', () => {
+  // Add active class to current section & navbar shadow
+  window.addEventListener('scroll', debounce(() => {
     let current = '';
     const sections = document.querySelectorAll('.section');
 
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      if (scrollY >= sectionTop - 100) {
+      if (scrollY >= sectionTop - 150) {
         current = section.getAttribute('id');
       }
     });
@@ -220,11 +284,11 @@ function initNavigation() {
     } else {
       navbar.classList.remove('scrolled');
     }
-  });
+  }, 10));
 }
 
 // ===================================
-// 5) PROJECT CARDS
+// PROJECT CARDS
 // ===================================
 function initProjectCards() {
   const projects = [
@@ -248,7 +312,7 @@ function initProjectCards() {
     },
     {
       title: 'HellCat',
-      description: 'An easy to use wrapper for HashCat on windows.',
+      description: 'An easy to use wrapper for HashCat on Windows.',
       url: 'https://github.com/BlackPaw21/HellCat',
       platform: 'W'
     },
@@ -266,12 +330,13 @@ function initProjectCards() {
     }
   ];
 
-  const wGrid = document.querySelector('#windows-projects .project-grid');
-  const lGrid = document.querySelector('#linux-projects .project-grid');
+  const wGrid = document.querySelector('#windows-grid');
+  const lGrid = document.querySelector('#linux-grid');
 
-  projects.forEach(p => {
+  projects.forEach((p, index) => {
     const card = document.createElement('div');
     card.className = 'project-card';
+    card.style.animationDelay = `${index * 0.1}s`;
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', '0');
     card.setAttribute('aria-label', `Open ${p.title} on GitHub`);
@@ -296,7 +361,74 @@ function initProjectCards() {
 }
 
 // ===================================
-// 6) BACK TO TOP BUTTON
+// ANIMATED COUNTERS
+// ===================================
+function initAnimatedCounters() {
+  const counters = document.querySelectorAll('.stat-number[data-target]');
+  const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px'
+  };
+
+  const animateCounter = (counter) => {
+    const target = parseInt(counter.getAttribute('data-target'));
+    const duration = 2000; // 2 seconds
+    const start = 0;
+    const increment = target / (duration / 16); // 60fps
+    let current = start;
+
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        counter.textContent = Math.floor(current);
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.textContent = target;
+      }
+    };
+
+    updateCounter();
+  };
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+        entry.target.classList.add('counted');
+        animateCounter(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  counters.forEach(counter => counterObserver.observe(counter));
+}
+
+// ===================================
+// SKILL PROGRESS BARS
+// ===================================
+function initSkillBars() {
+  const skillBars = document.querySelectorAll('.skill-progress-bar[data-progress]');
+  const observerOptions = {
+    threshold: 0.3,
+    rootMargin: '0px'
+  };
+
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+        entry.target.classList.add('animated');
+        const progress = entry.target.getAttribute('data-progress');
+        setTimeout(() => {
+          entry.target.style.width = `${progress}%`;
+        }, 100);
+      }
+    });
+  }, observerOptions);
+
+  skillBars.forEach(bar => skillObserver.observe(bar));
+}
+
+// ===================================
+// BACK TO TOP BUTTON
 // ===================================
 function initBackToTop() {
   const backBtn = document.getElementById('back-to-top');
@@ -325,7 +457,7 @@ function initBackToTop() {
   });
 
   // Hide after animation
-  backBtn.addEventListener('animationend', e => {
+  backBtn.addEventListener('animationend', (e) => {
     if (e.animationName === 'jumpOut') {
       backBtn.style.display = 'none';
       backBtn.classList.remove('hide');
@@ -347,7 +479,7 @@ function initBackToTop() {
 }
 
 // ===================================
-// 7) LOGO TAP COUNTER (Easter Egg)
+// LOGO TAP COUNTER (Easter Egg)
 // ===================================
 function initLogoTapCounter() {
   const logo = document.getElementById('hero-logo');
@@ -361,7 +493,7 @@ function initLogoTapCounter() {
     if (tapCount === 10) {
       const counter = document.createElement('div');
       counter.id = 'tap-counter';
-      counter.textContent = `Taps: ${tapCount}`;
+      counter.textContent = `Taps: ${tapCount} 🎉`;
       document.body.appendChild(counter);
       setTimeout(() => counter.classList.add('visible'), 10);
     }
@@ -369,7 +501,7 @@ function initLogoTapCounter() {
     // Update counter
     const counterEl = document.getElementById('tap-counter');
     if (counterEl) {
-      counterEl.textContent = `Taps: ${tapCount}`;
+      counterEl.textContent = `Taps: ${tapCount} ${tapCount >= 20 ? '🔥' : '🎉'}`;
       counterEl.classList.remove('fade-out');
       clearTimeout(hideTimer);
 
@@ -385,7 +517,7 @@ function initLogoTapCounter() {
 }
 
 // ===================================
-// 8) SCROLL ANIMATIONS
+// SCROLL ANIMATIONS
 // ===================================
 function initScrollAnimations() {
   const observerOptions = {
@@ -447,4 +579,17 @@ function isInViewport(element) {
     rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
+}
+
+// ===================================
+// PERFORMANCE MONITORING
+// ===================================
+if (window.performance && window.performance.timing) {
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const perfData = window.performance.timing;
+      const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+      console.log(`⚡ Page loaded in ${pageLoadTime}ms`);
+    }, 0);
+  });
 }
