@@ -4,10 +4,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BlackPaw's Forge</title>
+  <meta name="description" content="BlackPaw's Forge - Offensive security tools, red team utilities, and ethical hacking projects. Explore Windows and Linux security tools.">
+  <meta name="keywords" content="offensive security, red team, hacking tools, penetration testing, security tools">
+  <meta property="og:title" content="BlackPaw's Forge - Offensive Security Tools">
+  <meta property="og:description" content="Explore custom offensive security tools, red team utilities, and ethical hacking projects.">
+  <meta property="og:type" content="website">
+  <title>BlackPaw's Forge - Offensive Security Tools</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Fixed Navigation Header -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-text">BlackPaw's Forge</span>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <!-- Hero Section -->
   <section id="home" class="section hero">
     <canvas id="particles"></canvas>
@@ -18,38 +44,152 @@
       class="hero-logo fade-up"
       draggable="false"
       ondragstart="return false;">
-      <p><span id="hero-text"></span></p>
+      <h1 class="hero-title fade-up">BlackPaw's Forge</h1>
+      <p class="hero-subtitle fade-up"><span id="hero-text"></span></p>
+      <p class="hero-description fade-up">Red Team Tools & Offensive Security Projects</p>
       <div class="hero-buttons fade-up">
-        <a href="#projects" class="btn">View Projects</a>
-        <a href="#about" class="btn">About Me</a>
+        <a href="#projects" class="btn btn-primary">Explore Projects</a>
+        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section about">
+    <div class="section-container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <img src="https://avatars.githubusercontent.com/u/141940171?s=400&u=e1909c7c52ff700d56b8b2e59f25ee189b714233&v=4" alt="BlackPaw Profile Picture" class="profile-img">
+        <div class="about-text">
+          <p>
+            Hi! I go by <strong>BlackPaw</strong>. I'm a red teamer and offensive security enthusiast with a passion for scripting and tool development. I specialize in building custom exploits, stealth payloads, and automation tools that push the limits of ethical hacking.
+          </p>
+          <p>
+            Whether it's bypassing defenses, simulating real-world attacks, or writing efficient code to get the job done—I'm all about creative problem-solving and staying one step ahead in the ever-evolving landscape of cybersecurity.
+          </p>
+          <div class="about-stats">
+            <div class="stat-item">
+              <span class="stat-number">6+</span>
+              <span class="stat-label">Projects</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">2+</span>
+              <span class="stat-label">Platforms</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Dedication</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="section projects fade-up">
-    <h2>GitHub Projects</h2>
-    <div class="projects-wrapper">
-      <div class="project-column" id="windows-projects">
-        <h3>Windows</h3>
-        <div class="project-grid"></div>
-      </div>
-      <div class="project-column" id="linux-projects">
-        <h3>Linux</h3>
-        <div class="project-grid"></div>
+  <section id="projects" class="section projects">
+    <div class="section-container">
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">Open-source security tools and utilities</p>
+      <div class="projects-wrapper">
+        <div class="project-column" id="windows-projects">
+          <h3 class="platform-title">
+            <svg class="platform-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+            </svg>
+            Windows Tools
+          </h3>
+          <div class="project-grid"></div>
+        </div>
+        <div class="project-column" id="linux-projects">
+          <h3 class="platform-title">
+            <svg class="platform-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.84-.41 1.719-.287 2.618.123.899.435 1.725.949 2.463.514.738 1.204 1.334 2.01 1.746.806.412 1.675.638 2.557.667l.031.002c.863 0 1.638-.152 2.332-.381.694-.229 1.308-.563 1.853-.981.545-.418.987-.912 1.318-1.456.331-.544.537-1.137.622-1.764.085-.627.039-1.29-.092-1.984-.131-.694-.364-1.407-.665-2.141-.301-.734-.67-1.489-1.062-2.267-.392-.778-.817-1.58-1.262-2.397-.445-.817-.892-1.648-1.324-2.49-.432-.842-.846-1.698-1.212-2.566-.366-.868-.682-1.749-.928-2.642-.246-.893-.412-1.798-.505-2.711-.093-.913-.11-1.832-.048-2.754.062-.922.196-1.848.412-2.777.216-.929.526-1.862.934-2.797.408-.935.926-1.874 1.562-2.816C11.83 1.491 11.223.785 10.576.337 9.93-.111 9.177-.214 8.398-.09c-.779.124-1.504.454-2.127.93-.623.476-1.134 1.077-1.497 1.769-.363.692-.57 1.47-.609 2.306-.039.836.066 1.715.327 2.61.261.895.677 1.812 1.22 2.735.543.923 1.215 1.862 1.988 2.803.773.941 1.646 1.884 2.596 2.814.95.93 1.978 1.844 3.052 2.727 1.074.883 2.194 1.738 3.333 2.547 1.139.809 2.297 1.572 3.455 2.276 1.158.704 2.317 1.35 3.451 1.924 1.134.574 2.243 1.077 3.307 1.494 1.064.417 2.083.748 3.038.98.955.232 1.846.367 2.651.397.805.03 1.525-.06 2.144-.277.619-.217 1.137-.562 1.538-1.03.401-.468.687-1.057.844-1.754.157-.697.189-1.503.072-2.402-.117-.899-.361-1.89-.742-2.958-.381-1.068-.905-2.213-1.576-3.416-.671-1.203-1.493-2.466-2.467-3.765-.974-1.299-2.105-2.635-3.396-3.986-1.291-1.351-2.743-2.716-4.359-4.081C13.123 1.006 12.764.503 12.504 0z"/>
+            </svg>
+            Linux Tools
+          </h3>
+          <div class="project-grid"></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- About Section (hidden until bottom) -->
-  <section id="about" class="section about">
-    <h2>About Me</h2>
-    <div class="about-content">
-      <img src="https://avatars.githubusercontent.com/u/141940171?s=400&u=e1909c7c52ff700d56b8b2e59f25ee189b714233&v=4" alt="Profile Picture" class="profile-img">
-      <div class="about-text">
-        <p>
-          Hi!, I go by BlackPaw. I'm a red teamer and offensive security enthusiast with a passion for scripting and tool development. I specialize in building custom exploits, stealth payloads, and automation tools that push the limits of ethical hacking. Whether it's bypassing defenses, simulating real-world attacks, or writing efficient code to get the job done—I’m all about creative problem-solving and staying one step ahead.
-        </p>
+  <!-- Skills Section -->
+  <section id="skills" class="section skills">
+    <div class="section-container">
+      <h2 class="section-title">Skills & Technologies</h2>
+      <p class="section-subtitle">Tools and languages I work with</p>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3 class="skill-category-title">Languages</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">PowerShell</span>
+            <span class="skill-tag">Bash</span>
+            <span class="skill-tag">C#</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Go</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3 class="skill-category-title">Security Tools</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Metasploit</span>
+            <span class="skill-tag">Burp Suite</span>
+            <span class="skill-tag">Wireshark</span>
+            <span class="skill-tag">Nmap</span>
+            <span class="skill-tag">HashCat</span>
+            <span class="skill-tag">Cobalt Strike</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3 class="skill-category-title">Specializations</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Red Teaming</span>
+            <span class="skill-tag">Penetration Testing</span>
+            <span class="skill-tag">Exploit Development</span>
+            <span class="skill-tag">MITM Attacks</span>
+            <span class="skill-tag">Social Engineering</span>
+            <span class="skill-tag">Automation</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3 class="skill-category-title">Platforms</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Kali Linux</span>
+            <span class="skill-tag">Windows</span>
+            <span class="skill-tag">Active Directory</span>
+            <span class="skill-tag">Cloud Security</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact">
+    <div class="section-container">
+      <h2 class="section-title">Get In Touch</h2>
+      <p class="section-subtitle">Let's collaborate on security projects</p>
+      <div class="contact-content">
+        <div class="contact-links">
+          <a href="https://github.com/BlackPaw21" target="_blank" rel="noopener" class="contact-link">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            <span>GitHub: @BlackPaw21</span>
+          </a>
+          <a href="https://github.com/Wise02" target="_blank" rel="noopener" class="contact-link">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            <span>Collaborator: @Wise02</span>
+          </a>
+        </div>
+        <div class="contact-cta">
+          <p>Interested in collaboration, consulting, or just want to chat about security?</p>
+          <a href="https://github.com/BlackPaw21" target="_blank" rel="noopener" class="btn btn-primary">View My GitHub</a>
+        </div>
       </div>
     </div>
   </section>
@@ -63,19 +203,31 @@
 
   <!-- Footer -->
   <footer>
-    <p>
-      &copy; 2025 BlackPaw's Forge X
-      <a href="https://wise02.github.io/Workshop/" target="_blank" rel="noopener" class="footer-link">
-        Wise's Workshop
-      </a>
-    </p>
-    <a href="https://github.com/BlackPaw21" target="_blank" rel="noopener">
-      <img src="https://img.shields.io/badge/GitHub-BlackPaw21-181717?logo=github&logoColor=white" alt="GitHub BlackPaw21">
-    </a>
-    <div class="social-badges">
-      <a href="https://github.com/Wise02" target="_blank" rel="noopener">
-        <img src="https://img.shields.io/badge/GitHub-Wise02-181717?logo=github&logoColor=white" alt="GitHub Wise02">
-      </a>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3 class="footer-title">BlackPaw's Forge</h3>
+        <p class="footer-description">Building the future of offensive security tools.</p>
+      </div>
+      <div class="footer-section">
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4 class="footer-heading">Collaborators</h4>
+        <ul class="footer-links">
+          <li><a href="https://wise02.github.io/Workshop/" target="_blank" rel="noopener">Wise's Workshop</a></li>
+          <li><a href="https://github.com/Wise02" target="_blank" rel="noopener">@Wise02</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 BlackPaw's Forge. All rights reserved.</p>
     </div>
   </footer>
 
