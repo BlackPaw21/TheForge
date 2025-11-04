@@ -1,145 +1,510 @@
-// script.js
+// ===================================
+// THEFORGE - ULTIMATE JAVASCRIPT
+// Advanced Interactive Features
+// ===================================
+
+// ===================================
+// INITIALIZATION
+// ===================================
 document.addEventListener('DOMContentLoaded', () => {
-  // 0) Inject custom cursor
+  initLoadingScreen();
+  initScrollProgress();
+  initCustomCursor();
+  initHeroAnimations();
+  initTypingEffect();
+  initParticleBackground();
+  initProjectCards();
+  initNavigation();
+  initBackToTop();
+  initLogoTapCounter();
+  initScrollAnimations();
+  initAnimatedCounters();
+  initSkillBars();
+});
+
+// ===================================
+// LOADING SCREEN
+// ===================================
+function initLoadingScreen() {
+  const loadingScreen = document.getElementById('loading-screen');
+  const loadingBar = document.querySelector('.loading-bar-fill');
+  const loadingPercent = document.querySelector('.loading-percent');
+
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += Math.random() * 15;
+    if (progress > 100) progress = 100;
+
+    loadingBar.style.width = `${progress}%`;
+    loadingPercent.textContent = `${Math.floor(progress)}%`;
+
+    if (progress === 100) {
+      clearInterval(interval);
+      setTimeout(() => {
+        loadingScreen.classList.add('loaded');
+        document.body.classList.add('loaded');
+      }, 500);
+    }
+  }, 150);
+}
+
+// ===================================
+// SCROLL PROGRESS BAR
+// ===================================
+function initScrollProgress() {
+  const progressBar = document.querySelector('.scroll-progress-bar');
+
+  window.addEventListener('scroll', () => {
+    const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = (window.scrollY / windowHeight) * 100;
+    progressBar.style.width = `${scrolled}%`;
+  });
+}
+
+// ===================================
+// CUSTOM CURSOR
+// ===================================
+function initCustomCursor() {
   const customCursor = document.createElement('div');
   customCursor.id = 'custom-cursor';
   const cursorImg = document.createElement('img');
   cursorImg.src = 'png/cursor.png';
+  cursorImg.alt = 'Custom cursor';
   customCursor.appendChild(cursorImg);
   document.body.appendChild(customCursor);
 
-  // 1) Fade‑in hero/logo/buttons
-  document.body.classList.add('loaded');
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
+  const speed = 0.15;
 
-  // 2) Typing effect 
+  // Smooth cursor following
+  function animateCursor() {
+    const distX = mouseX - cursorX;
+    const distY = mouseY - cursorY;
+
+    cursorX += distX * speed;
+    cursorY += distY * speed;
+
+    customCursor.style.left = `${cursorX}px`;
+    customCursor.style.top = `${cursorY}px`;
+
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  // Glow effect on click
+  document.addEventListener('mousedown', (e) => {
+    if (e.button === 1) { e.preventDefault(); return; }
+    document.body.classList.add('clicking');
+  });
+
+  document.addEventListener('mouseup', (e) => {
+    if (e.button === 1) { e.preventDefault(); return; }
+    document.body.classList.remove('clicking');
+  });
+
+  window.addEventListener('auxclick', (e) => {
+    if (e.button === 1) e.preventDefault();
+  });
+}
+
+// ===================================
+// HERO ANIMATIONS
+// ===================================
+function initHeroAnimations() {
+  // Animations triggered by loading screen
+  // Body already has 'loaded' class added
+}
+
+// ===================================
+// TYPING EFFECT
+// ===================================
+function initTypingEffect() {
   const text = '| Linux Tools | Windows Tools | Offensive Security |';
   const heroTextEl = document.getElementById('hero-text');
   let idx = 0;
+
   setTimeout(function type() {
     if (idx < text.length) {
       heroTextEl.textContent += text.charAt(idx++);
       setTimeout(type, 35);
     }
-  }, 300);
+  }, 800);
+}
 
-  // 3) Custom cursor follows mouse
-  document.addEventListener('mousemove', e => {
-    customCursor.style.left = `${e.clientX}px`;
-    customCursor.style.top  = `${e.clientY}px`;
-  });
-
-  // 4) Toggle cursor glow on click
-  document.addEventListener('mousedown', e => {
-    if (e.button === 1) { e.preventDefault(); return; }
-    document.body.classList.add('clicking');
-  });
-  document.addEventListener('mouseup', e => {
-    if (e.button === 1) { e.preventDefault(); return; }
-    document.body.classList.remove('clicking');
-  });
-  window.addEventListener('auxclick', e => {
-    if (e.button === 1) e.preventDefault();
-  });
-
-  // 5) Particle background with glow & fade‑out
+// ===================================
+// PARTICLE BACKGROUND
+// ===================================
+function initParticleBackground() {
   const canvas = document.getElementById('particles');
-  const ctx    = canvas.getContext('2d');
-  const colors = ['#0f9','#fff','#0faa'];
+  const ctx = canvas.getContext('2d');
+  const colors = ['#0f9', '#fff', '#0faa86'];
   let particles = [];
   const maxParticles = 100;
-  const margin       = 100;
+  const margin = 100;
+  let animationId = null;
 
   function initParticles() {
     particles = Array.from({ length: maxParticles }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       size: Math.random() * 2 + 1,
-      vx: Math.random() - 0.5,
-      vy: Math.random() - 0.5,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
       c: colors[Math.floor(Math.random() * colors.length)]
     }));
   }
+
   function resizeCanvas() {
-    canvas.width  = window.innerWidth;
+    canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     initParticles();
   }
+
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     particles.forEach(p => {
+      // Calculate distance from edges
       const dx = Math.min(p.x, canvas.width - p.x);
       const dy = Math.min(p.y, canvas.height - p.y);
-      const d  = Math.min(dx, dy);
+      const d = Math.min(dx, dy);
       let alpha = d < margin ? d / margin : 1;
+
+      // Respawn particles that fade out
       if (alpha <= 0) {
         p.x = margin + Math.random() * (canvas.width - 2 * margin);
         p.y = margin + Math.random() * (canvas.height - 2 * margin);
         alpha = 1;
       }
-      ctx.shadowBlur  = 10;
+
+      // Draw particle with glow
+      ctx.shadowBlur = 10;
       ctx.shadowColor = p.c;
       ctx.globalAlpha = alpha;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fillStyle = p.c;
       ctx.fill();
-      ctx.shadowBlur  = 0;
+      ctx.shadowBlur = 0;
       ctx.globalAlpha = 1;
-      p.x += p.vx; p.y += p.vy;
+
+      // Update position
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Wrap around edges
       if (p.x < 0) p.x = canvas.width;
       if (p.x > canvas.width) p.x = 0;
       if (p.y < 0) p.y = canvas.height;
       if (p.y > canvas.height) p.y = 0;
     });
-    requestAnimationFrame(draw);
+
+    animationId = requestAnimationFrame(draw);
   }
-  window.addEventListener('resize', resizeCanvas);
+
+  // Pause animation when tab is not visible (performance optimization)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (animationId) cancelAnimationFrame(animationId);
+    } else {
+      draw();
+    }
+  });
+
+  window.addEventListener('resize', debounce(resizeCanvas, 250));
   resizeCanvas();
   draw();
+}
 
-  // 6) Generate project cards.
+// ===================================
+// NAVIGATION
+// ===================================
+function initNavigation() {
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const navbar = document.getElementById('navbar');
+
+  // Mobile menu toggle
+  navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+
+    // Animate hamburger icon
+    const spans = navToggle.querySelectorAll('span');
+    if (navMenu.classList.contains('active')) {
+      spans[0].style.transform = 'rotate(45deg) translateY(8px)';
+      spans[1].style.opacity = '0';
+      spans[2].style.transform = 'rotate(-45deg) translateY(-8px)';
+    } else {
+      spans[0].style.transform = 'none';
+      spans[1].style.opacity = '1';
+      spans[2].style.transform = 'none';
+    }
+  });
+
+  // Close mobile menu when clicking a link
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      const spans = navToggle.querySelectorAll('span');
+      spans[0].style.transform = 'none';
+      spans[1].style.opacity = '1';
+      spans[2].style.transform = 'none';
+    });
+  });
+
+  // Add active class to current section & navbar shadow
+  window.addEventListener('scroll', debounce(() => {
+    let current = '';
+    const sections = document.querySelectorAll('.section');
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      if (scrollY >= sectionTop - 150) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+
+    // Add shadow to navbar on scroll
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  }, 10));
+}
+
+// ===================================
+// PROJECT CARDS
+// ===================================
+function initProjectCards() {
   const projects = [
-    { title: 'Bundler', description: 'A universal link bundler for everyday use.', url: 'https://github.com/BlackPaw21/Bundler', platform: 'W' },
-    { title: 'RevChat',    description: 'A real-time communication chat application with a secret reverse shell.', url: 'https://github.com/wise02/RevChat',    platform: 'W' },
-    { title: 'ZipCracker', description: 'A powerful script to brute force your way into any password protected zip or rar.', url: 'https://github.com/Wise02/ZipCracker', platform: 'W' },
-    { title: 'HellCat', description: 'An easy to use wrapper for HashCat on windows.', url: 'https://github.com/BlackPaw21/HellCat', platform: 'W' },
-    { title: 'KaliQuickFix',description: 'never have to type --fix-missing or --break-system-packages again!.', url: 'https://github.com/BlackPaw21/KaliQuickFix', platform: 'L' },
-    { title: 'TheListener',description: 'a strong MITM attack that will reveal HTTP/HTTPS request on the connected network.', url: 'https://github.com/BlackPaw21/TheListener', platform: 'L' }
+    {
+      title: 'Bundler',
+      description: 'A universal link bundler for everyday use.',
+      url: 'https://github.com/BlackPaw21/Bundler',
+      platform: 'W'
+    },
+    {
+      title: 'RevChat',
+      description: 'A real-time communication chat application with a secret reverse shell.',
+      url: 'https://github.com/wise02/RevChat',
+      platform: 'W'
+    },
+    {
+      title: 'ZipCracker',
+      description: 'A powerful script to brute force your way into any password protected zip or rar.',
+      url: 'https://github.com/Wise02/ZipCracker',
+      platform: 'W'
+    },
+    {
+      title: 'HellCat',
+      description: 'An easy to use wrapper for HashCat on Windows.',
+      url: 'https://github.com/BlackPaw21/HellCat',
+      platform: 'W'
+    },
+    {
+      title: 'KaliQuickFix',
+      description: 'Never have to type --fix-missing or --break-system-packages again!',
+      url: 'https://github.com/BlackPaw21/KaliQuickFix',
+      platform: 'L'
+    },
+    {
+      title: 'TheListener',
+      description: 'A strong MITM attack that will reveal HTTP/HTTPS requests on the connected network.',
+      url: 'https://github.com/BlackPaw21/TheListener',
+      platform: 'L'
+    }
   ];
-  const wGrid = document.querySelector('#windows-projects .project-grid');
-  const lGrid = document.querySelector('#linux-projects .project-grid');
-  projects.forEach(p => {
+
+  const wGrid = document.querySelector('#windows-grid');
+  const lGrid = document.querySelector('#linux-grid');
+
+  projects.forEach((p, index) => {
     const card = document.createElement('div');
     card.className = 'project-card';
-    card.onclick   = () => window.open(p.url, '_blank');
-    card.innerHTML = `<h3>${p.title}</h3><p>${p.description}</p>`;
+    card.style.animationDelay = `${index * 0.1}s`;
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `Open ${p.title} on GitHub`);
+
+    card.onclick = () => window.open(p.url, '_blank', 'noopener');
+
+    // Keyboard accessibility
+    card.onkeydown = (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        window.open(p.url, '_blank', 'noopener');
+      }
+    };
+
+    card.innerHTML = `
+      <h3>${p.title}</h3>
+      <p>${p.description}</p>
+    `;
+
     (p.platform === 'W' ? wGrid : lGrid).appendChild(card);
   });
+}
 
-  // 7) Show/Hide About on scroll bottom
-  const about = document.getElementById('about');
+// ===================================
+// ANIMATED COUNTERS
+// ===================================
+function initAnimatedCounters() {
+  const counters = document.querySelectorAll('.stat-number[data-target]');
+  const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px'
+  };
+
+  const animateCounter = (counter) => {
+    const target = parseInt(counter.getAttribute('data-target'));
+    const duration = 2000; // 2 seconds
+    const start = 0;
+    const increment = target / (duration / 16); // 60fps
+    let current = start;
+
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        counter.textContent = Math.floor(current);
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.textContent = target;
+      }
+    };
+
+    updateCounter();
+  };
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+        entry.target.classList.add('counted');
+        animateCounter(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  counters.forEach(counter => counterObserver.observe(counter));
+}
+
+// ===================================
+// SKILL PROGRESS BARS
+// ===================================
+function initSkillBars() {
+  const skillBars = document.querySelectorAll('.skill-progress-bar[data-progress]');
+  const observerOptions = {
+    threshold: 0.3,
+    rootMargin: '0px'
+  };
+
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+        entry.target.classList.add('animated');
+        const progress = entry.target.getAttribute('data-progress');
+        setTimeout(() => {
+          entry.target.style.width = `${progress}%`;
+        }, 100);
+      }
+    });
+  }, observerOptions);
+
+  skillBars.forEach(bar => skillObserver.observe(bar));
+}
+
+// ===================================
+// BACK TO TOP BUTTON
+// ===================================
+function initBackToTop() {
+  const backBtn = document.getElementById('back-to-top');
+  const heroSection = document.getElementById('home');
+  let isVisible = false;
+  let threshold = 0;
+
+  // Calculate threshold after load
+  setTimeout(() => {
+    threshold = heroSection.offsetHeight * 0.5;
+  }, 100);
+
   window.addEventListener('scroll', () => {
-    const atBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 5;
-    about.classList.toggle('visible', atBottom);
+    const pastThreshold = window.scrollY > threshold;
+
+    if (pastThreshold && !isVisible) {
+      backBtn.style.display = 'flex';
+      backBtn.classList.remove('hide');
+      backBtn.classList.add('show');
+      isVisible = true;
+    } else if (!pastThreshold && isVisible) {
+      backBtn.classList.remove('show');
+      backBtn.classList.add('hide');
+      isVisible = false;
+    }
   });
 
-  // 8) Logo “Tap” Counter
+  // Hide after animation
+  backBtn.addEventListener('animationend', (e) => {
+    if (e.animationName === 'jumpOut') {
+      backBtn.style.display = 'none';
+      backBtn.classList.remove('hide');
+    }
+  });
+
+  // Scroll to top on click
+  backBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Keyboard accessibility
+  backBtn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+}
+
+// ===================================
+// LOGO TAP COUNTER (Easter Egg)
+// ===================================
+function initLogoTapCounter() {
   const logo = document.getElementById('hero-logo');
-  let tapCount = 0, hideTimer;
+  let tapCount = 0;
+  let hideTimer;
+
   logo.addEventListener('click', () => {
     tapCount++;
+
+    // Create counter at 10 taps
     if (tapCount === 10) {
       const counter = document.createElement('div');
       counter.id = 'tap-counter';
-      counter.textContent = `Taps: ${tapCount}`;
+      counter.textContent = `Taps: ${tapCount} 🎉`;
       document.body.appendChild(counter);
       setTimeout(() => counter.classList.add('visible'), 10);
     }
+
+    // Update counter
     const counterEl = document.getElementById('tap-counter');
     if (counterEl) {
-      counterEl.textContent = `Taps: ${tapCount}`;
+      counterEl.textContent = `Taps: ${tapCount} ${tapCount >= 20 ? '🔥' : '🎉'}`;
       counterEl.classList.remove('fade-out');
       clearTimeout(hideTimer);
+
       hideTimer = setTimeout(() => {
         counterEl.classList.add('fade-out');
         setTimeout(() => {
@@ -149,52 +514,82 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 3000);
     }
   });
+}
 
-  // Back to Top button logic (50% of first section threshold)
-const backBtn = document.getElementById('back-to-top');
-const heroSection = document.getElementById('home');
-let isVisible = false;
+// ===================================
+// SCROLL ANIMATIONS
+// ===================================
+function initScrollAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
 
-// compute threshold once (half of hero height)
-const threshold = heroSection.offsetHeight * 0.5;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
 
-window.addEventListener('scroll', () => {
-  const pastThreshold = window.scrollY > threshold;
-  if (pastThreshold && !isVisible) {
-    // pop in
-    backBtn.style.display = 'flex';
-    backBtn.classList.remove('hide');
-    backBtn.classList.add('show');
-    isVisible = true;
-  } 
-  else if (!pastThreshold && isVisible) {
-    // pop out
-    backBtn.classList.remove('show');
-    backBtn.classList.add('hide');
-    isVisible = false;
-  }
-});
-
-// after jumpOut animation, hide and reset
-backBtn.addEventListener('animationend', e => {
-  if (e.animationName === 'jumpOut') {
-    backBtn.style.display = 'none';
-    backBtn.classList.remove('hide');
-  }
-});
-
-// click to scroll up
-backBtn.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-
-  // 9) Mobile: override About‑Me link to scroll to footer
-  const aboutBtn = document.querySelector('a[href="#about"]');
-  aboutBtn.addEventListener('click', e => {
-    if (matchMedia('(hover: none), (pointer: coarse)').matches) {
-      e.preventDefault();
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }
+  // Observe sections for scroll animations
+  const animatedElements = document.querySelectorAll('.section:not(.hero)');
+  animatedElements.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
   });
-});
+
+  // Make visible sections fully visible
+  const style = document.createElement('style');
+  style.textContent = `
+    .section.visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+// ===================================
+// UTILITY FUNCTIONS
+// ===================================
+
+// Debounce function for performance
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Check if element is in viewport
+function isInViewport(element) {
+  const rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+
+// ===================================
+// PERFORMANCE MONITORING
+// ===================================
+if (window.performance && window.performance.timing) {
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const perfData = window.performance.timing;
+      const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+      console.log(`⚡ Page loaded in ${pageLoadTime}ms`);
+    }, 0);
+  });
+}
