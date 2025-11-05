@@ -125,7 +125,7 @@ function initHeroAnimations() {
 // TYPING EFFECT
 // ===================================
 function initTypingEffect() {
-  const text = '| Linux Tools | Windows Tools | Offensive Security |';
+  const text = '| Security Tools | Red Team Utilities | Offensive Security |';
   const heroTextEl = document.getElementById('hero-text');
   let idx = 0;
 
@@ -295,43 +295,41 @@ function initProjectCards() {
     {
       title: 'Bundler',
       description: 'A universal link bundler for everyday use.',
-      url: 'https://github.com/BlackPaw21/Bundler',
-      platform: 'W'
+      url: 'https://github.com/BlackPaw21/Bundler'
     },
     {
       title: 'RevChat',
       description: 'A real-time communication chat application with a secret reverse shell.',
-      url: 'https://github.com/wise02/RevChat',
-      platform: 'W'
+      url: 'https://github.com/wise02/RevChat'
     },
     {
       title: 'ZipCracker',
       description: 'A powerful script to brute force your way into any password protected zip or rar.',
-      url: 'https://github.com/Wise02/ZipCracker',
-      platform: 'W'
+      url: 'https://github.com/Wise02/ZipCracker'
     },
     {
       title: 'HellCat',
       description: 'An easy to use wrapper for HashCat on Windows.',
-      url: 'https://github.com/BlackPaw21/HellCat',
-      platform: 'W'
+      url: 'https://github.com/BlackPaw21/HellCat'
     },
     {
       title: 'KaliQuickFix',
       description: 'Never have to type --fix-missing or --break-system-packages again!',
-      url: 'https://github.com/BlackPaw21/KaliQuickFix',
-      platform: 'L'
+      url: 'https://github.com/BlackPaw21/KaliQuickFix'
     },
     {
       title: 'TheListener',
       description: 'A strong MITM attack that will reveal HTTP/HTTPS requests on the connected network.',
-      url: 'https://github.com/BlackPaw21/TheListener',
-      platform: 'L'
+      url: 'https://github.com/BlackPaw21/TheListener'
+    },
+    {
+      title: 'TerminalLife',
+      description: 'An interactive terminal-based game simulating life choices and consequences.',
+      url: 'https://github.com/BlackPaw21/TerminalLife'
     }
   ];
 
-  const wGrid = document.querySelector('#windows-grid');
-  const lGrid = document.querySelector('#linux-grid');
+  const projectsGrid = document.querySelector('#projects-grid');
 
   projects.forEach((p, index) => {
     const card = document.createElement('div');
@@ -356,7 +354,7 @@ function initProjectCards() {
       <p>${p.description}</p>
     `;
 
-    (p.platform === 'W' ? wGrid : lGrid).appendChild(card);
+    projectsGrid.appendChild(card);
   });
 }
 
