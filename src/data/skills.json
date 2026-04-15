@@ -1,18 +1,18 @@
 [
   {
-    "category": "Offensive",
-    "items": ["Buffer Overflow", "ROP Chains", "Heap Exploitation", "Shellcode", "AD Attacks", "Phishing", "C2 Development"]
+    "category": "Frontend",
+    "items": ["HTML/CSS", "JavaScript", "TypeScript", "React", "Astro", "Animations", "Responsive Design"]
   },
   {
-    "category": "Reverse Engineering",
-    "items": ["x64 Disassembly", "IDA Pro", "Ghidra", "x64dbg", "PE Analysis", "Anti-debug", "VMT Hooking"]
+    "category": "Design",
+    "items": ["UI Design", "Figma", "Typography", "Color Theory", "Motion Design", "Dark Aesthetics", "Brand Identity"]
   },
   {
     "category": "Languages",
-    "items": ["C/C++", "Python", "MASM/NASM", "Lua", "Bash", "PowerShell"]
+    "items": ["JavaScript", "TypeScript", "Python", "C/C++", "CSS", "Bash"]
   },
   {
     "category": "Tools",
-    "items": ["Cheat Engine", "WinDbg", "ReClass.NET", "Process Hacker", "Metasploit", "Cobalt Strike", "Burp Suite"]
+    "items": ["VS Code", "Figma", "Git", "Photoshop", "After Effects", "Node.js"]
   }
 ]

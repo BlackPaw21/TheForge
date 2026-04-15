@@ -1,9 +1,8 @@
 ---
 // src/components/Contact.astro
 const links = [
-  { label: 'GitHub',     href: 'https://github.com/BlackPaw',            handle: '@BlackPaw' },
-  { label: 'HackTheBox', href: 'https://hackthebox.com/profile/0',       handle: 'BlackPaw' },
-  { label: 'Email',      href: 'mailto:betai1357@gmail.com',             handle: 'betai1357@gmail.com' },
+  { label: 'GitHub',  href: 'https://github.com/BlackPaw',       handle: '@BlackPaw' },
+  { label: 'Email',   href: 'mailto:blackpaw21@gmail.com',        handle: 'blackpaw21@gmail.com' },
 ];
 ---
 
@@ -12,8 +11,8 @@ const links = [
     <p class="section-label reveal">05 / CONTACT</p>
     <h2 class="section-title reveal">GET IN<br />TOUCH</h2>
     <p class="contact-sub reveal">
-      No recruiters. Security researchers, collaborators, and people<br />
-      who've found something interesting — welcome.
+      Collaborators, fellow designers, and anyone with an interesting<br />
+      idea — welcome.
     </p>
     <div class="contact-links reveal">
       {links.map(l => (
@@ -37,7 +36,7 @@ const links = [
   .contact-links {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 8px;
     max-width: 480px;
   }
   .contact-link {
