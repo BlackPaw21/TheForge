@@ -1,0 +1,58 @@
+---
+// src/components/Skills.astro
+import skills from '../data/skills.json';
+---
+
+<section id="skills" class="section">
+  <div class="container">
+    <p class="section-label reveal">04 / SKILLS</p>
+    <h2 class="section-title reveal">ARSENAL OF<br />KNOWLEDGE</h2>
+    <div class="skills-grid">
+      {skills.map(group => (
+        <div class="skill-group reveal">
+          <div class="skill-group-label">{group.category}</div>
+          <div class="skill-tags">
+            {group.items.map(item => (
+              <span class="tag">{item}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2px;
+  }
+  .skill-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 28px;
+  }
+  .skill-group-label {
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: var(--blood);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .skill-tags .tag {
+    transition: border-color 100ms, color 100ms;
+  }
+  .skill-tags .tag:hover {
+    border-color: var(--text);
+    color: var(--text);
+  }
+</style>

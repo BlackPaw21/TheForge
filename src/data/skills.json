@@ -1,0 +1,18 @@
+[
+  {
+    "category": "Offensive",
+    "items": ["Buffer Overflow", "ROP Chains", "Heap Exploitation", "Shellcode", "AD Attacks", "Phishing", "C2 Development"]
+  },
+  {
+    "category": "Reverse Engineering",
+    "items": ["x64 Disassembly", "IDA Pro", "Ghidra", "x64dbg", "PE Analysis", "Anti-debug", "VMT Hooking"]
+  },
+  {
+    "category": "Languages",
+    "items": ["C/C++", "Python", "MASM/NASM", "Lua", "Bash", "PowerShell"]
+  },
+  {
+    "category": "Tools",
+    "items": ["Cheat Engine", "WinDbg", "ReClass.NET", "Process Hacker", "Metasploit", "Cobalt Strike", "Burp Suite"]
+  }
+]
