@@ -1,0 +1,81 @@
+---
+// src/components/ToolCard.astro
+interface Props {
+  name: string;
+  description: string;
+  tags: string[];
+  repo_url: string;
+  release_url: string;
+  status: string;
+}
+const { name, description, tags, repo_url, release_url, status } = Astro.props;
+---
+
+<div class="tool-card reveal">
+  <div class="tool-header">
+    <h3 class="tool-name">{name}</h3>
+    <span class={`tool-status ${status}`}>{status}</span>
+  </div>
+  <p class="tool-desc">{description}</p>
+  <div class="tool-tags">
+    {tags.map(t => <span class="tag">{t}</span>)}
+  </div>
+  <div class="tool-actions">
+    {repo_url && <a href={repo_url} target="_blank" rel="noopener" class="btn btn--ghost">REPO →</a>}
+    {release_url && <a href={release_url} target="_blank" rel="noopener" class="btn">DOWNLOAD →</a>}
+  </div>
+</div>
+
+<style>
+  .tool-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 28px;
+    position: relative;
+    transition: border-color 100ms, background 100ms;
+  }
+  .tool-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: var(--blood);
+    transition: width 100ms;
+  }
+  .tool-card:hover { border-color: var(--blood); background: var(--elevated); }
+  .tool-card:hover::before { width: 3px; }
+  .tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .tool-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--text);
+  }
+  .tool-status {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid;
+  }
+  .tool-status.active { color: #00cc44; border-color: #00cc44; }
+  .tool-status.archived { color: var(--muted); border-color: var(--border); }
+  .tool-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .tool-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .tool-actions {
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+</style>

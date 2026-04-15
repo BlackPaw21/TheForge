@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Bundler",
+    "description": "Resource bundler for portable executable packaging — embed and extract assets at runtime.",
+    "tags": ["c++", "windows", "pe"],
+    "repo_url": "https://github.com/BlackPaw/Bundler",
+    "release_url": "",
+    "status": "active"
+  },
+  {
+    "name": "RevChat",
+    "description": "Reverse shell with encrypted C2 channel and persistence mechanisms.",
+    "tags": ["c++", "windows", "c2"],
+    "repo_url": "https://github.com/BlackPaw/RevChat",
+    "release_url": "",
+    "status": "active"
+  },
+  {
+    "name": "HellCat",
+    "description": "Process injection toolkit supporting multiple techniques including hollowing and APC injection.",
+    "tags": ["c++", "windows", "injection"],
+    "repo_url": "https://github.com/BlackPaw/HellCat",
+    "release_url": "",
+    "status": "active"
+  },
+  {
+    "name": "TheListener",
+    "description": "Network listener and traffic analyzer for C2 callback interception and debugging.",
+    "tags": ["python", "networking", "c2"],
+    "repo_url": "https://github.com/BlackPaw/TheListener",
+    "release_url": "",
+    "status": "active"
+  },
+  {
+    "name": "ZipCracker",
+    "description": "High-performance ZIP password cracker with dictionary and brute-force modes.",
+    "tags": ["python", "cracking"],
+    "repo_url": "https://github.com/BlackPaw/ZipCracker",
+    "release_url": "",
+    "status": "archived"
+  },
+  {
+    "name": "KaliQuickFix",
+    "description": "Automated Kali Linux post-install setup and toolchain configuration script.",
+    "tags": ["bash", "linux", "setup"],
+    "repo_url": "https://github.com/BlackPaw/KaliQuickFix",
+    "release_url": "",
+    "status": "archived"
+  },
+  {
+    "name": "TerminalLife",
+    "description": "Conway's Game of Life implementation in the terminal with configurable board size and speed.",
+    "tags": ["python", "terminal"],
+    "repo_url": "https://github.com/BlackPaw/TerminalLife",
+    "release_url": "",
+    "status": "archived"
+  }
+]
