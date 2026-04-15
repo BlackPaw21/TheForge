@@ -1,0 +1,174 @@
+/* src/styles/global.css */
+
+/* ── Fonts ─────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;700&display=swap');
+
+/* ── Variables ──────────────────────────────────── */
+:root {
+  --void:       #050505;
+  --surface:    #0d0d0d;
+  --elevated:   #151515;
+  --blood:      #ff2020;
+  --blood-dark: #cc1a1a;
+  --text:       #e0e0e0;
+  --muted:      #555555;
+  --border:     #1a1a1a;
+
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  --nav-height: 56px;
+}
+
+/* ── Reset ──────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  background: var(--void);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+body {
+  min-height: 100vh;
+  /* subtle grid background */
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* cursor: none on desktop — custom cursor replaces it */
+@media (hover: hover) {
+  * { cursor: none !important; }
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font-family: var(--font-mono); cursor: none; }
+
+/* ── Typography ─────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: 3px;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+/* ── Utility ────────────────────────────────────── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 100px 0;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--blood);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 6vw, 60px);
+  letter-spacing: 4px;
+  color: var(--text);
+  margin-bottom: 48px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.tag--red {
+  border-color: var(--blood);
+  color: var(--blood);
+}
+
+/* ── Scroll Reveal ──────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+.reveal.visible {
+  opacity: 1;
+}
+
+/* ── Custom Cursor ──────────────────────────────── */
+#cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 20px; height: 20px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+#cursor::before,
+#cursor::after {
+  content: '';
+  position: absolute;
+  background: var(--blood);
+}
+/* horizontal bar */
+#cursor::before {
+  top: 50%; left: 0;
+  width: 100%; height: 1px;
+  transform: translateY(-50%);
+}
+/* vertical bar */
+#cursor::after {
+  left: 50%; top: 0;
+  width: 1px; height: 100%;
+  transform: translateX(-50%);
+}
+
+/* ── Scrollbar ──────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--void); }
+::-webkit-scrollbar-thumb { background: var(--blood-dark); }
+
+/* ── Buttons ────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border: 1px solid var(--blood);
+  color: var(--blood);
+  background: transparent;
+  transition: background 100ms, color 100ms;
+}
+.btn:hover {
+  background: var(--blood);
+  color: var(--void);
+}
+.btn--ghost {
+  border-color: var(--border);
+  color: var(--muted);
+}
+.btn--ghost:hover {
+  border-color: var(--text);
+  color: var(--text);
+  background: transparent;
+}
