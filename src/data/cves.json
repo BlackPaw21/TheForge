@@ -1,0 +1,12 @@
+[
+  {
+    "cve_id": "CVE-2024-00001",
+    "product": "Example Software 3.2",
+    "severity": "HIGH",
+    "cvss": 8.1,
+    "year": 2024,
+    "description": "Stack buffer overflow in the authentication handler allows remote code execution via crafted network packets.",
+    "advisory_url": "",
+    "writeup_slug": ""
+  }
+]

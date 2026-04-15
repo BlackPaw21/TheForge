@@ -1,0 +1,111 @@
+---
+// src/components/CveRow.astro
+interface Props {
+  cve_id: string;
+  product: string;
+  severity: string;
+  cvss: number;
+  year: number;
+  description: string;
+  advisory_url: string;
+  writeup_slug: string;
+}
+const p = Astro.props;
+
+const severityColors: Record<string, string> = {
+  CRITICAL: '#ff2020',
+  HIGH:     '#cc4400',
+  MEDIUM:   '#886600',
+  LOW:      '#446600',
+};
+const sevColor = severityColors[p.severity] ?? 'var(--muted)';
+---
+
+<div class="cve-row reveal">
+  <div class="cve-id">
+    <span class="cve-id-text">{p.cve_id}</span>
+    <span class="cve-year">{p.year}</span>
+  </div>
+  <div class="cve-product">{p.product}</div>
+  <div class="cve-severity" style={`color:${sevColor};border-color:${sevColor}`}>
+    {p.severity}
+  </div>
+  <div class="cve-cvss">
+    <span class="cvss-num">{p.cvss.toFixed(1)}</span>
+  </div>
+  <div class="cve-desc">{p.description}</div>
+  <div class="cve-links">
+    {p.advisory_url && (
+      <a href={p.advisory_url} target="_blank" rel="noopener" class="cve-link">ADVISORY →</a>
+    )}
+    {p.writeup_slug && (
+      <a href={`/writeups/${p.writeup_slug}`} class="cve-link">WRITEUP →</a>
+    )}
+  </div>
+</div>
+
+<style>
+  .cve-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 90px 60px 2fr 160px;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin-bottom: 2px;
+    transition: border-color 100ms, background 100ms;
+    position: relative;
+  }
+  .cve-row::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: var(--blood);
+    transition: width 100ms;
+  }
+  .cve-row:hover { border-color: var(--blood); background: var(--elevated); }
+  .cve-row:hover::before { width: 3px; }
+  .cve-id-text {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--blood);
+    font-family: var(--font-mono);
+  }
+  .cve-year { font-size: 10px; color: var(--muted); }
+  .cve-product { font-size: 12px; color: var(--text); }
+  .cve-severity {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid;
+    padding: 3px 6px;
+    text-align: center;
+  }
+  .cvss-num {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--text);
+  }
+  .cve-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .cve-links { display: flex; flex-direction: column; gap: 6px; }
+  .cve-link {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--blood);
+    text-transform: uppercase;
+    transition: letter-spacing 100ms;
+  }
+  .cve-link:hover { letter-spacing: 3px; }
+
+  @media (max-width: 900px) {
+    .cve-row {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+    }
+    .cve-desc { grid-column: 1 / -1; }
+    .cve-links { grid-column: 1 / -1; flex-direction: row; }
+  }
+</style>

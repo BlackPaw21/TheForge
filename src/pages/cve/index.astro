@@ -1,0 +1,63 @@
+---
+// src/pages/cve/index.astro
+import Base from '../../layouts/Base.astro';
+import CveRow from '../../components/CveRow.astro';
+import cves from '../../data/cves.json';
+
+const sorted = [...cves].sort((a, b) => b.cvss - a.cvss);
+---
+
+<Base title="CVE — BlackPaw's Forge">
+  <div class="page-header">
+    <div class="container">
+      <p class="section-label">CVE</p>
+      <h1 class="page-title">HALL OF<br />FAME</h1>
+      <p class="page-sub">Vulnerabilities found and responsibly disclosed.</p>
+    </div>
+  </div>
+
+  <div class="container page-body">
+    <div class="cve-header">
+      <span>CVE ID</span>
+      <span>PRODUCT</span>
+      <span>SEVERITY</span>
+      <span>CVSS</span>
+      <span>DESCRIPTION</span>
+      <span>LINKS</span>
+    </div>
+    {sorted.map(c => <CveRow {...c} />)}
+  </div>
+</Base>
+
+<style>
+  .page-header {
+    padding: calc(var(--nav-height) + 60px) 0 60px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 60px;
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 8vw, 96px);
+    letter-spacing: 4px;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .page-sub { font-size: 13px; color: var(--muted); line-height: 1.9; max-width: 480px; }
+  .page-body { padding-bottom: 100px; }
+  .cve-header {
+    display: grid;
+    grid-template-columns: 180px 1fr 90px 60px 2fr 160px;
+    gap: 16px;
+    padding: 10px 20px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 900px) {
+    .cve-header { display: none; }
+  }
+</style>
