@@ -1,0 +1,151 @@
+---
+// src/components/Nav.astro
+const links = [
+  { label: 'Arsenal',   href: '/#arsenal'    },
+  { label: 'About',     href: '/#about'      },
+  { label: 'Writeups',  href: '/writeups'    },
+  { label: 'Tools',     href: '/tools'       },
+  { label: 'CVE',       href: '/cve'         },
+  { label: 'Contact',   href: '/#contact'    },
+];
+---
+
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo">BLACKPAW<span>.</span></a>
+
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" role="list">
+      {links.map(l => (
+        <li><a href={l.href} class="nav-link">{l.label}</a></li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  #nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: var(--nav-height);
+    background: transparent;
+    transition: background 120ms, border-bottom 120ms;
+  }
+  #nav.scrolled {
+    background: var(--void);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: var(--text);
+  }
+  .nav-logo span { color: var(--blood); }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-link {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 100ms;
+    position: relative;
+  }
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    left: -8px; top: 50%;
+    transform: translateY(-50%);
+    width: 0; height: 100%;
+    background: var(--blood);
+    transition: width 100ms;
+  }
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--text);
+  }
+  .nav-link.active::before { width: 3px; }
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 8px;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px; height: 1px;
+    background: var(--text);
+    transition: transform 150ms, opacity 150ms;
+  }
+
+  @media (max-width: 768px) {
+    .nav-toggle { display: flex; }
+    .nav-links {
+      display: none;
+      position: fixed;
+      top: var(--nav-height);
+      left: 0; right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: var(--void);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+    .nav-links.open { display: flex; }
+    .nav-link { padding: 12px 24px; }
+    .nav-link::before { display: none; }
+    #nav.open .nav-toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    #nav.open .nav-toggle span:nth-child(2) { opacity: 0; }
+    #nav.open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('nav')!;
+  const toggle = nav.querySelector('.nav-toggle') as HTMLButtonElement;
+  const navLinks = nav.querySelector('.nav-links') as HTMLElement;
+
+  // Scroll: add .scrolled class
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // Mobile toggle
+  toggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    nav.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  // Active section highlighting (landing page only)
+  if (window.location.pathname === '/') {
+    const sections = document.querySelectorAll('section[id]');
+    const links = nav.querySelectorAll('.nav-link[href^="/#"]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          const active = nav.querySelector(`.nav-link[href="/#${entry.target.id}"]`);
+          active?.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+    sections.forEach(s => observer.observe(s));
+  }
+</script>
