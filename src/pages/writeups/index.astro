@@ -1,0 +1,117 @@
+---
+import Base from '../../layouts/Base.astro';
+import WriteupCard from '../../components/WriteupCard.astro';
+import { getCollection } from 'astro:content';
+
+const allWriteups = (await getCollection('writeups'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const allTags = [...new Set(allWriteups.flatMap(w => w.data.tags))].sort();
+---
+
+<Base title="Writeups — BlackPaw's Forge">
+  <div class="page-header">
+    <div class="container">
+      <p class="section-label">WRITEUPS</p>
+      <h1 class="page-title">DOCUMENTED<br />WRECKAGE</h1>
+      <p class="page-sub">
+        CTF solutions, vulnerability research, and technique walkthroughs.
+        On-site and external.
+      </p>
+    </div>
+  </div>
+
+  <div class="container page-body">
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-tag="all">ALL</button>
+      {allTags.map(tag => (
+        <button class="filter-btn" data-tag={tag}>{tag}</button>
+      ))}
+    </div>
+
+    <div class="writeups-grid" id="writeups-grid">
+      {allWriteups.map(w => (
+        <div class="writeup-wrapper" data-tags={w.data.tags.join(',')}>
+          <WriteupCard
+            title={w.data.title}
+            date={w.data.date}
+            tags={w.data.tags}
+            difficulty={w.data.difficulty}
+            source={w.data.source}
+            external_url={w.data.external_url}
+            slug={w.id}
+            excerpt={w.data.excerpt}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .page-header {
+    padding: calc(var(--nav-height) + 60px) 0 60px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 60px;
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 8vw, 96px);
+    letter-spacing: 4px;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .page-sub {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.9;
+    max-width: 480px;
+  }
+  .page-body { padding-bottom: 100px; }
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+  .filter-btn {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: transparent;
+    transition: all 100ms;
+  }
+  .filter-btn:hover,
+  .filter-btn.active {
+    border-color: var(--blood);
+    color: var(--blood);
+  }
+  .writeups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2px;
+  }
+  .writeup-wrapper.hidden { display: none; }
+</style>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const wrappers = document.querySelectorAll<HTMLElement>('.writeup-wrapper');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag!;
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      wrappers.forEach(w => {
+        const tags = w.dataset.tags?.split(',') ?? [];
+        w.classList.toggle('hidden', tag !== 'all' && !tags.includes(tag));
+      });
+    });
+  });
+</script>
