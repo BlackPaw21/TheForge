@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Bundler",
+    "description": "A universal link bundler for everyday use.",
+    "tags": ["python", "utility", "web"],
+    "repo_url": "https://github.com/BlackPaw21/Bundler",
+    "stars": 0
+  },
+  {
+    "name": "RevChat",
+    "description": "A real-time communication chat application with a secret reverse shell.",
+    "tags": ["python", "networking", "red-team"],
+    "repo_url": "https://github.com/wise02/RevChat",
+    "stars": 0
+  },
+  {
+    "name": "ZipCracker",
+    "description": "A powerful script to brute force your way into any password protected zip or rar.",
+    "tags": ["python", "cracking", "bruteforce"],
+    "repo_url": "https://github.com/Wise02/ZipCracker",
+    "stars": 0
+  },
+  {
+    "name": "HellCat",
+    "description": "An easy to use wrapper for HashCat on Windows.",
+    "tags": ["python", "hashcat", "windows"],
+    "repo_url": "https://github.com/BlackPaw21/HellCat",
+    "stars": 0
+  },
+  {
+    "name": "KaliQuickFix",
+    "description": "Never have to type --fix-missing or --break-system-packages again.",
+    "tags": ["bash", "kali", "linux"],
+    "repo_url": "https://github.com/BlackPaw21/KaliQuickFix",
+    "stars": 0
+  },
+  {
+    "name": "TheListener",
+    "description": "A strong MITM attack that will reveal HTTP/HTTPS requests on the connected network.",
+    "tags": ["python", "mitm", "networking"],
+    "repo_url": "https://github.com/BlackPaw21/TheListener",
+    "stars": 0
+  },
+  {
+    "name": "TerminalLife",
+    "description": "An interactive terminal-based game simulating life choices and consequences.",
+    "tags": ["python", "game", "terminal"],
+    "repo_url": "https://github.com/BlackPaw21/TerminalLife",
+    "stars": 0
+  }
+]
