@@ -1,0 +1,20 @@
+[
+  {
+    "year": "2024",
+    "role": "Independent Security Researcher",
+    "org": "Independent",
+    "description": "Developing custom offensive security tools, conducting penetration testing, and contributing to open-source security projects. Focus on Windows and Linux exploitation, MITM attacks, and automation tooling."
+  },
+  {
+    "year": "2023",
+    "role": "Tool Development & Research",
+    "org": "Independent",
+    "description": "Built multiple security tools including ZipCracker, RevChat, and TheListener. Specialized in creating user-friendly wrappers for complex security tools and MITM attack frameworks."
+  },
+  {
+    "year": "2023",
+    "role": "Red Team Operations",
+    "org": "Freelance",
+    "description": "Focused on offensive security techniques, exploit development, and building custom payloads. Developed expertise in bypassing security controls and simulating advanced persistent threats."
+  }
+]
