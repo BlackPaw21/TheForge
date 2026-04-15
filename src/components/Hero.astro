@@ -1,0 +1,112 @@
+---
+// src/components/Hero.astro
+---
+
+<section id="hero" class="hero">
+  <div class="container hero-inner">
+    <div class="hero-tag reveal">SYS://FORGE.LOCAL</div>
+    <h1 class="hero-name">
+      <span id="scramble-target" data-text="BLACKPAW">BLACKPAW</span>
+    </h1>
+    <p class="hero-role reveal">'S FORGE</p>
+    <div class="hero-divider reveal"></div>
+    <p class="hero-tagline reveal">
+      Offensive security researcher. Breaking systems,<br />
+      building tools, documenting the wreckage.
+    </p>
+    <div class="hero-actions reveal">
+      <a href="#arsenal" class="btn">VIEW ARSENAL</a>
+      <a href="/writeups" class="btn btn--ghost">WRITEUPS →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: var(--nav-height);
+  }
+  .hero-inner {
+    padding: 80px 0;
+  }
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--blood);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(72px, 14vw, 160px);
+    letter-spacing: 6px;
+    color: var(--text);
+    line-height: 0.9;
+  }
+  .hero-role {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 7vw, 80px);
+    letter-spacing: 6px;
+    color: var(--blood);
+    line-height: 1;
+    margin-top: 4px;
+  }
+  .hero-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--blood);
+    margin: 32px 0;
+  }
+  .hero-tagline {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+</style>
+
+<script>
+  // Text scramble: randomize characters then resolve to real text
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
+
+  function scramble(el: HTMLElement, finalText: string) {
+    let iteration = 0;
+    const totalFrames = finalText.length * 4;
+
+    const interval = setInterval(() => {
+      el.textContent = finalText
+        .split('')
+        .map((char, i) => {
+          if (i < Math.floor(iteration / 4)) return char;
+          return CHARS[Math.floor(Math.random() * CHARS.length)];
+        })
+        .join('');
+
+      if (iteration >= totalFrames) {
+        el.textContent = finalText;
+        clearInterval(interval);
+      }
+      iteration++;
+    }, 30);
+  }
+
+  // Fire once after a short delay
+  const target = document.getElementById('scramble-target') as HTMLElement;
+  const finalText = target.dataset.text ?? target.textContent ?? '';
+  target.textContent = '';
+
+  setTimeout(() => {
+    scramble(target, finalText);
+    // Trigger reveal on elements that don't need to wait
+    document.querySelectorAll('.hero .reveal').forEach(el => {
+      setTimeout(() => el.classList.add('visible'), 400);
+    });
+  }, 300);
+</script>
