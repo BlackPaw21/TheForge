@@ -1,20 +1,26 @@
 [
   {
-    "year": "2024",
-    "role": "Independent Security Researcher",
-    "org": "Independent",
-    "description": "Developing custom offensive security tools, conducting penetration testing, and contributing to open-source security projects. Focus on Windows and Linux exploitation, MITM attacks, and automation tooling."
+    "year": "2026",
+    "role": "Windhawk Modding",
+    "org": "WH-mods — github.com/BlackPaw21",
+    "description": "Built a collection of Windhawk mods for Windows system customization. Focused on lightweight, targeted tweaks that change how Windows behaves under the hood."
   },
   {
-    "year": "2023",
-    "role": "Tool Development & Research",
-    "org": "Independent",
-    "description": "Built multiple security tools including ZipCracker, RevChat, and TheListener. Specialized in creating user-friendly wrappers for complex security tools and MITM attack frameworks."
+    "year": "2025",
+    "role": "SOC Assessment Platform",
+    "org": "SAP — github.com/BlackPaw21",
+    "description": "Designed and built an interactive web-based assessment application for Tier-1 SOC Analysts. Full UI, question flow, and scoring system — built to actually feel good to use."
   },
   {
-    "year": "2023",
-    "role": "Red Team Operations",
-    "org": "Freelance",
-    "description": "Focused on offensive security techniques, exploit development, and building custom payloads. Developed expertise in bypassing security controls and simulating advanced persistent threats."
+    "year": "2025",
+    "role": "Network & Security Tooling",
+    "org": "TheListener — github.com/BlackPaw21",
+    "description": "Complex MITM attack tool that intercepts and reveals HTTP/HTTPS traffic on a connected network. Deep dive into packet manipulation and network-layer visibility."
+  },
+  {
+    "year": "2025",
+    "role": "CLI Tools & Utilities",
+    "org": "HellCat / KaliQuickFix / Bundler",
+    "description": "Released a wave of focused CLI tools: HellCat (hashcat shortcut for Windows), KaliQuickFix (auto-resolves common Kali apt errors), and Bundler (packages links for easy sharing)."
   }
 ]

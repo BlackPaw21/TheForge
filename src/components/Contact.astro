@@ -1,9 +1,5 @@
 ---
 // src/components/Contact.astro
-const links = [
-  { label: 'GitHub',  href: 'https://github.com/BlackPaw',       handle: '@BlackPaw' },
-  { label: 'Email',   href: 'mailto:blackpaw21@gmail.com',        handle: 'blackpaw21@gmail.com' },
-];
 ---
 
 <section id="contact" class="section">
@@ -15,13 +11,16 @@ const links = [
       idea — welcome.
     </p>
     <div class="contact-links reveal">
-      {links.map(l => (
-        <a href={l.href} target="_blank" rel="noopener" class="contact-link">
-          <span class="contact-link-label">{l.label}</span>
-          <span class="contact-link-handle">{l.handle}</span>
-          <span class="contact-link-arrow">→</span>
-        </a>
-      ))}
+      <a href="https://github.com/BlackPaw21" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-link-label">GitHub</span>
+        <span class="contact-link-handle">@BlackPaw21</span>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <button class="contact-link email-copy" data-email="blackpaw21@gmail.com" type="button">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-handle">blackpaw21@gmail.com</span>
+        <span class="contact-link-arrow copy-hint">CLICK TO COPY</span>
+      </button>
     </div>
   </div>
 </section>
@@ -48,6 +47,11 @@ const links = [
     border: 1px solid var(--border);
     transition: border-color 100ms, background 100ms;
     position: relative;
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-mono);
+    color: inherit;
+    text-decoration: none;
   }
   .contact-link::before {
     content: '';
@@ -84,4 +88,31 @@ const links = [
     transform: translateX(4px);
     color: var(--text);
   }
+  .copy-hint {
+    font-size: 9px;
+    letter-spacing: 2px;
+    transform: none !important;
+  }
+  .email-copy.copied {
+    border-color: var(--blood);
+  }
+  .email-copy.copied .copy-hint {
+    color: var(--blood);
+  }
 </style>
+
+<script>
+  const btn = document.querySelector('.email-copy') as HTMLButtonElement;
+  const hint = btn.querySelector('.copy-hint') as HTMLElement;
+  const email = btn.dataset.email!;
+
+  btn.addEventListener('click', async () => {
+    await navigator.clipboard.writeText(email);
+    hint.textContent = 'COPIED!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      hint.textContent = 'CLICK TO COPY';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+</script>
