@@ -1,0 +1,18 @@
+[
+  {
+    "category": "Frontend",
+    "items": ["HTML/CSS", "JavaScript", "TypeScript", "React", "Astro", "Animations", "Responsive Design"]
+  },
+  {
+    "category": "Design",
+    "items": ["UI Design", "Figma", "Typography", "Color Theory", "Motion Design", "Dark Aesthetics", "Brand Identity"]
+  },
+  {
+    "category": "Languages",
+    "items": ["JavaScript", "TypeScript", "Python", "C/C++", "CSS", "Bash"]
+  },
+  {
+    "category": "Tools",
+    "items": ["VS Code", "Figma", "Git", "Photoshop", "After Effects", "Node.js"]
+  }
+]

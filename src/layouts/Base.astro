@@ -1,0 +1,138 @@
+---
+// src/layouts/Base.astro
+import Nav from '../components/Nav.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "BlackPaw's Forge",
+  description = "Offensive security research, tools, and writeups."
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+  <link rel="icon" type="image/png" href={`${base}/logo.png`} />
+</head>
+<body>
+  <!-- Animated grid background -->
+  <canvas id="grid-bg" aria-hidden="true"></canvas>
+
+  <!-- Custom cursor -->
+  <div id="cursor" aria-hidden="true"></div>
+
+  <Nav />
+
+  <main>
+    <slot />
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span class="footer-text">© {new Date().getFullYear()} BlackPaw — All rights reserved.</span>
+      <a href="#top" class="btn btn--ghost">BACK TO TOP ↑</a>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style>
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+  }
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-text {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+</style>
+
+<script>
+  // Animated grid — canvas + rAF syncs to vsync, no CSS aliasing jank
+  const canvas = document.getElementById('grid-bg') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+  const GRID = 40;
+  const SPEED = 0.4; // px per frame (~24px/sec at 60fps)
+  let offset = 0;
+
+  function resizeCanvas() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function drawGrid() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#1a1a1a';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+
+    const o = offset % GRID;
+    // vertical lines
+    for (let x = o - GRID; x < canvas.width + GRID; x += GRID) {
+      const px = Math.round(x) + 0.5;
+      ctx.moveTo(px, 0);
+      ctx.lineTo(px, canvas.height);
+    }
+    // horizontal lines
+    for (let y = o - GRID; y < canvas.height + GRID; y += GRID) {
+      const py = Math.round(y) + 0.5;
+      ctx.moveTo(0, py);
+      ctx.lineTo(canvas.width, py);
+    }
+
+    ctx.stroke();
+    offset += SPEED;
+    requestAnimationFrame(drawGrid);
+  }
+
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas, { passive: true });
+  drawGrid();
+
+  // Custom cursor
+  const cursor = document.getElementById('cursor')!;
+  window.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+  }, { passive: true });
+
+  // Dynamic cursor: expand + white crosshair + red dot over interactive elements
+  const interactive = 'a, button, input, textarea, select, [role="button"], label, .btn';
+  document.addEventListener('mouseover', e => {
+    if ((e.target as Element).closest(interactive)) cursor.classList.add('hovering');
+  });
+  document.addEventListener('mouseout', e => {
+    if ((e.target as Element).closest(interactive)) cursor.classList.remove('hovering');
+  });
+
+  // Scroll reveal
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>

@@ -1,0 +1,126 @@
+---
+// src/components/Contact.astro
+---
+
+<section id="contact" class="section">
+  <div class="container">
+    <p class="section-label reveal">05 / CONTACT</p>
+    <h2 class="section-title reveal">GET IN<br />TOUCH</h2>
+    <p class="contact-sub reveal">
+      Collaborators, fellow designers, and anyone with an interesting<br />
+      idea — welcome.
+    </p>
+    <div class="contact-links reveal">
+      <a href="https://ko-fi.com/blackpaw21" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-link-label">Support</span>
+        <span class="contact-link-handle">Buy me a coffee</span>
+        <span class="contact-link-arrow">☕</span>
+      </a>
+      <a href="https://github.com/BlackPaw21" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-link-label">GitHub</span>
+        <span class="contact-link-handle">@BlackPaw21</span>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <button class="contact-link email-copy" data-email="almogpian21@gmail.com" type="button">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-handle">almogpian21@gmail.com</span>
+        <span class="contact-link-arrow copy-hint">CLICK TO COPY</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-sub {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 48px;
+  }
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 480px;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: border-color 100ms, background 100ms;
+    position: relative;
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-mono);
+    color: inherit;
+    text-decoration: none;
+  }
+  .contact-link::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: var(--blood);
+    transition: width 100ms;
+  }
+  .contact-link:hover {
+    border-color: var(--blood);
+    background: var(--elevated);
+  }
+  .contact-link:hover::before { width: 3px; }
+  .contact-link-label {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blood);
+    min-width: 100px;
+  }
+  .contact-link-handle {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--muted);
+    flex: 1;
+    padding: 0 16px;
+  }
+  .contact-link-arrow {
+    color: var(--muted);
+    font-size: 14px;
+    transition: transform 100ms, color 100ms;
+  }
+  .contact-link:hover .contact-link-arrow {
+    transform: translateX(4px);
+    color: var(--text);
+  }
+  .copy-hint {
+    font-size: 9px;
+    letter-spacing: 2px;
+    transform: none !important;
+  }
+  .email-copy.copied {
+    border-color: var(--blood);
+  }
+  .email-copy.copied .copy-hint {
+    color: var(--blood);
+  }
+</style>
+
+<script>
+  const btn = document.querySelector('.email-copy') as HTMLButtonElement;
+  const hint = btn.querySelector('.copy-hint') as HTMLElement;
+  const email = btn.dataset.email!;
+
+  btn.addEventListener('click', async () => {
+    await navigator.clipboard.writeText(email);
+    hint.textContent = 'COPIED!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      hint.textContent = 'CLICK TO COPY';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+</script>

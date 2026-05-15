@@ -1,0 +1,44 @@
+[
+  {
+    "name": "TheListener",
+    "description": "Network-layer MITM attack tool designed to intercept and reveal HTTP/HTTPS requests. Implements packet manipulation techniques for deep traffic visibility.",
+    "tags": ["python", "mitm", "offensive-security"],
+    "repo_url": "https://github.com/BlackPaw21/TheListener",
+    "stars": 0
+  },
+  {
+    "name": "SAP",
+    "description": "SOC Assessment Platform. An interactive web-based environment for training and evaluating Tier-1 SOC Analysts on incident response and log analysis workflows.",
+    "tags": ["javascript", "blue-team", "soc-ops"],
+    "repo_url": "https://github.com/BlackPaw21/SAP",
+    "stars": 0
+  },
+  {
+    "name": "wh-mods",
+    "description": "Custom Windows system modifications built for the Windhawk platform. Leverages C++ and API hooking for low-level OS customization and behavior tweaks.",
+    "tags": ["c++", "windows-internals", "modding"],
+    "repo_url": "https://github.com/BlackPaw21/wh-mods",
+    "stars": 0
+  },
+  {
+    "name": "HellCat",
+    "description": "High-performance wrapper and automation utility for HashCat on Windows. Streamlines the password recovery and cryptographic auditing workflow.",
+    "tags": ["python", "hashcat", "cryptography"],
+    "repo_url": "https://github.com/BlackPaw21/HellCat",
+    "stars": 0
+  },
+  {
+    "name": "KaliQuickFix",
+    "description": "Automated system recovery script for Kali Linux. Resolves common apt dependency errors and package-management conflicts automatically.",
+    "tags": ["bash", "linux", "automation"],
+    "repo_url": "https://github.com/BlackPaw21/KaliQuickFix",
+    "stars": 0
+  },
+  {
+    "name": "Bundler",
+    "description": "A universal link bundling and sharing utility. Designed for rapid resource packaging and efficient distribution of project assets.",
+    "tags": ["python", "utility", "productivity"],
+    "repo_url": "https://github.com/BlackPaw21/Bundler",
+    "stars": 0
+  }
+]

@@ -1,0 +1,101 @@
+---
+// src/components/About.astro
+---
+
+<section id="about" class="section">
+  <div class="container">
+    <p class="section-label reveal">01 / ABOUT</p>
+    <h2 class="section-title reveal">WHO IS<br />BLACKPAW</h2>
+    <div class="about-bio reveal">
+      <p>
+        Vibe coder and designer. I build things by feel — dark aesthetics,
+        clean interactions, and interfaces that actually look like something.
+      </p>
+      <p>
+        I care more about how something feels than how it's categorized.
+        If it looks good, runs smooth, and has a personality — that's the goal.
+      </p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat">
+        <span class="stat-num" id="stat-cves">0</span>
+        <span class="stat-label">Projects Built</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" id="stat-tools">0</span>
+        <span class="stat-label">Tools Released</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" id="stat-writeups">0</span>
+        <span class="stat-label">Designs</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-bio {
+    max-width: 600px;
+  }
+  .about-bio p {
+    color: var(--muted);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.9;
+    margin-bottom: 16px;
+  }
+  .about-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    max-width: 600px;
+  }
+  .stat-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 48px;
+    letter-spacing: 2px;
+    color: var(--blood);
+    line-height: 1;
+  }
+  .stat-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+</style>
+
+<script>
+  function animateCounter(el: HTMLElement, target: number, duration: number = 1200) {
+    const start = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      el.textContent = String(Math.floor(progress * target));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  const STATS = { cves: 7, tools: 5, writeups: 3 };
+
+  const statsSection = document.querySelector('.about-stats') as HTMLElement;
+  let counted = false;
+
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      animateCounter(document.getElementById('stat-cves')!, STATS.cves);
+      animateCounter(document.getElementById('stat-tools')!, STATS.tools);
+      animateCounter(document.getElementById('stat-writeups')!, STATS.writeups);
+    }
+  }, { threshold: 0.5 });
+
+  observer.observe(statsSection);
+</script>
