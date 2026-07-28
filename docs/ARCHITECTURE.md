@@ -174,6 +174,25 @@ Deployment: Push to `main` branch, GitHub Actions or manual Pages deploy
 
 ---
 
+## Responsive Breakpoints
+
+| Breakpoint | Container Padding | Section Padding | Hero Inner Padding |
+|---|---|---|---|
+| > 600px | 24px | 100px vertical | 60px 24px |
+| 401-600px | 32px | 60px vertical | 40px 32px |
+| ≤ 400px | 24px | 48px vertical | 32px 24px |
+
+### Mobile Hero Text Sizes
+
+| Element | 401-600px | ≤ 400px |
+|---|---|---|
+| Tag (SYS://FORGE.LOCAL) | 24px | 22px |
+| Name (BLACKPAW'S) | clamp(86px, 26vw, 144px) | 62px |
+| Role (FORGE) | clamp(53px, 14vw, 77px) | 43px |
+| Tagline | 14px | 12px |
+
+Mobile keeps the same left-aligned, side-by-side layout as desktop — only padding and font-sizes scale.
+
 ## Development
 
 ```bash
