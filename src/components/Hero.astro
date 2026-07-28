@@ -171,15 +171,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   }
 
   @media (max-width: 600px) {
-    .hero-inner {
-      padding: 48px 32px;
-    }
+    .hero-inner { padding: 40px 32px; }
+    .hero-tagline { max-width: 100%; }
   }
 
   @media (max-width: 400px) {
-    .hero-inner {
-      padding: 36px 24px;
-    }
+    .hero-inner { padding: 32px 24px; }
   }
   .hero-tag {
     font-size: 14px;
@@ -235,11 +232,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     letter-spacing: 3px;
   }
 
-  @media (max-width: 600px) {
-    .hero-inner { text-align: center; }
-    .hero-tagline { margin-left: auto; margin-right: auto; }
-    .hero-actions { justify-content: center; }
-  }
   .btn--primary {
     background: var(--blood-dark);
     color: var(--void);
@@ -264,21 +256,19 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   @media (max-width: 600px) {
     #terminal-boot { padding: 32px; }
     .boot-content { padding: 16px 20px; font-size: 12px; min-height: 200px; }
-    .hero-inner { text-align: center; }
     .hero-name { font-size: clamp(40px, 12vw, 72px); letter-spacing: 2px; }
     .hero-role { font-size: clamp(24px, 6vw, 36px); letter-spacing: 4px; }
-    .hero-tagline { font-size: 14px; max-width: 100%; margin-left: auto; margin-right: auto; }
-    .hero-actions { flex-direction: column; justify-content: center; align-items: center; }
-    .hero-actions .btn { width: 100%; text-align: center; padding: 16px 24px; }
+    .hero-tagline { font-size: 14px; }
+    .hero-actions .btn { padding: 14px 24px; }
     .hero-tag { font-size: 12px; letter-spacing: 2px; }
     .boot-window { max-width: 100%; }
   }
 
   @media (max-width: 400px) {
-    .hero-name { font-size: 32px; letter-spacing: 1px; }
-    .hero-role { font-size: 22px; letter-spacing: 3px; }
-    .hero-tagline { font-size: 13px; }
-    .hero-actions .btn { font-size: 11px; padding: 14px 20px; }
+    .hero-name { font-size: 28px; letter-spacing: 1px; }
+    .hero-role { font-size: 20px; letter-spacing: 3px; }
+    .hero-tagline { font-size: 12px; }
+    .hero-actions .btn { font-size: 11px; padding: 12px 16px; }
     .hero-tag { font-size: 11px; }
     .boot-content { padding: 12px 16px; font-size: 11px; min-height: 180px; }
     #terminal-boot { padding: 24px; }
