@@ -164,10 +164,12 @@ import projects from '../data/projects.json';
   }
 
   @media (max-width: 600px) {
-    .arsenal-grid {
-      grid-template-columns: 1fr;
-    }
+    .arsenal-grid { grid-template-columns: 1fr; gap: 10px; }
     .project-card-inner { padding: 20px; }
-    .project-name { font-size: 18px; }
+    .project-name { font-size: 16px; }
+    .project-desc { font-size: 13px; }
+    .project-tagline { font-size: 12px; }
+    .project-link { font-size: 10px; flex-wrap: wrap; }
+    .project-link-name { word-break: break-all; }
   }
 </style>

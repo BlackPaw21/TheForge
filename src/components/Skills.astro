@@ -57,9 +57,10 @@ import skills from '../data/skills.json';
   }
 
   @media (max-width: 600px) {
-    .skills-grid {
-      grid-template-columns: 1fr;
-    }
+    .skills-grid { grid-template-columns: 1fr; gap: 12px; }
     .skill-group { padding: 20px; }
+    .skill-group-label { font-size: 15px; letter-spacing: 2px; }
+    .skill-tags { gap: 6px; }
+    .skill-tags .tag { font-size: 11px; padding: 3px 8px; }
   }
 </style>

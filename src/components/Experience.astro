@@ -120,14 +120,28 @@ import experience from '../data/experience.json';
   @media (max-width: 600px) {
     .timeline-line { left: 10px; }
     .timeline-entry {
-      grid-template-columns: 20px 1fr;
+      grid-template-columns: 16px 1fr;
+      gap: 12px;
+      margin-bottom: 32px;
     }
     .timeline-year { display: none; }
-    .timeline-dot { grid-column: 1; margin-top: 2px; }
-    .timeline-content { grid-column: 2; }
+    .timeline-dot { grid-column: 1; margin-top: 4px; width: 10px; height: 10px; }
+    .timeline-content { grid-column: 2; padding: 14px 16px; }
     .timeline-entry.left .timeline-year,
     .timeline-entry.right .timeline-year { grid-column: 3; }
     .timeline-entry.right .timeline-content { grid-column: 2; }
     .timeline-entry.right .timeline-year { display: none; }
+    .timeline-role { font-size: 15px; }
+    .timeline-org { font-size: 11px; letter-spacing: 1px; }
+    .timeline-desc { font-size: 13px; }
+  }
+
+  @media (max-width: 400px) {
+    .timeline-entry { gap: 8px; margin-bottom: 24px; }
+    .timeline-line { left: 8px; }
+    .timeline-entry { grid-template-columns: 12px 1fr; }
+    .timeline-content { padding: 12px; }
+    .timeline-role { font-size: 14px; }
+    .timeline-desc { font-size: 12px; }
   }
 </style>

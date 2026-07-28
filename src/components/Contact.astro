@@ -132,10 +132,19 @@
   }
 
   @media (max-width: 600px) {
-    .contact-link { padding: 14px 16px; gap: 8px; font-size: 13px; }
+    .contact-link { padding: 14px 14px; gap: 8px; font-size: 12px; }
     .contact-link-label { min-width: 0; display: none; }
-    .contact-link-handle { font-size: 13px; }
-    .contact-sub { font-size: 16px; }
+    .contact-link-handle { font-size: 12px; }
+    .contact-link-prompt { min-width: 12px; }
+    .contact-sub { font-size: 15px; margin-bottom: 32px; }
+    .contact-links { gap: 6px; }
+  }
+
+  @media (max-width: 400px) {
+    .contact-link { padding: 12px 12px; font-size: 11px; }
+    .contact-link-handle { font-size: 11px; }
+    .contact-link-prompt { min-width: 10px; font-size: 11px; }
+    .contact-sub br { display: none; }
   }
 </style>
 

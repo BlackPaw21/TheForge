@@ -75,9 +75,17 @@
   }
 
   @media (max-width: 600px) {
-    .about-bio p { font-size: 16px; }
-    .about-stats { gap: 24px; flex-wrap: wrap; }
-    .stat-num { font-size: 36px; }
+    .about-bio p { font-size: 15px; line-height: 1.8; }
+    .about-stats { gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .stat { text-align: center; flex: 1; min-width: 80px; }
+    .stat-num { font-size: 32px; }
+    .stat-label { font-size: 11px; letter-spacing: 1px; }
+  }
+
+  @media (max-width: 400px) {
+    .about-stats { gap: 12px; }
+    .stat-num { font-size: 28px; }
+    .stat { min-width: 70px; }
   }
 </style>
 

@@ -162,18 +162,24 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   }
 
   @keyframes heroEntry {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 
   .hero-inner {
-    padding: 60px 0;
+    padding: 60px 24px;
+  }
+
+  @media (max-width: 600px) {
+    .hero-inner {
+      padding: 48px 32px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .hero-inner {
+      padding: 36px 24px;
+    }
   }
   .hero-tag {
     font-size: 14px;
@@ -228,6 +234,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     font-size: 12px;
     letter-spacing: 3px;
   }
+
+  @media (max-width: 600px) {
+    .hero-inner { text-align: center; }
+    .hero-tagline { margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+  }
   .btn--primary {
     background: var(--blood-dark);
     color: var(--void);
@@ -250,10 +262,26 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   }
 
   @media (max-width: 600px) {
-    .boot-content { padding: 16px; font-size: 12px; min-height: 200px; }
-    .hero-name { font-size: clamp(48px, 14vw, 80px); letter-spacing: 4px; }
-    .hero-role { font-size: clamp(28px, 7vw, 40px); letter-spacing: 6px; }
-    .hero-tagline { font-size: 14px; }
+    #terminal-boot { padding: 32px; }
+    .boot-content { padding: 16px 20px; font-size: 12px; min-height: 200px; }
+    .hero-inner { text-align: center; }
+    .hero-name { font-size: clamp(40px, 12vw, 72px); letter-spacing: 2px; }
+    .hero-role { font-size: clamp(24px, 6vw, 36px); letter-spacing: 4px; }
+    .hero-tagline { font-size: 14px; max-width: 100%; margin-left: auto; margin-right: auto; }
+    .hero-actions { flex-direction: column; justify-content: center; align-items: center; }
+    .hero-actions .btn { width: 100%; text-align: center; padding: 16px 24px; }
+    .hero-tag { font-size: 12px; letter-spacing: 2px; }
+    .boot-window { max-width: 100%; }
+  }
+
+  @media (max-width: 400px) {
+    .hero-name { font-size: 32px; letter-spacing: 1px; }
+    .hero-role { font-size: 22px; letter-spacing: 3px; }
+    .hero-tagline { font-size: 13px; }
+    .hero-actions .btn { font-size: 11px; padding: 14px 20px; }
+    .hero-tag { font-size: 11px; }
+    .boot-content { padding: 12px 16px; font-size: 11px; min-height: 180px; }
+    #terminal-boot { padding: 24px; }
   }
 </style>
 
