@@ -1,18 +1,38 @@
 [
   {
-    "category": "Frontend",
-    "items": ["HTML/CSS", "JavaScript", "TypeScript", "React", "Astro", "Animations", "Responsive Design"]
+    "category": "Languages",
+    "items": ["C/C++", "Rust", "Python", "TypeScript", "JavaScript", "Bash", "Lua", "C#"]
+  },
+  {
+    "category": "Platforms",
+    "items": ["Windows Win32/COM", "Android (Magisk/Termux)", "ESP32 (ESP-IDF)", "Kali Linux", "Raspberry Pi", "Godot 4"]
+  },
+  {
+    "category": "Offensive Security",
+    "items": ["Network Pentesting", "Ghidra Reverse Engineering", "Hashcat", "Pwnagotchi", "Wazuh SIEM", "WPA2 Handshakes", "Reversing"]
+  },
+  {
+    "category": "Windows Internals",
+    "items": ["Windhawk Modding", "Raw Input Hooks", "COM Interfaces", "Win32 API", "GDI Rendering", "IMMNotificationClient"]
+  },
+  {
+    "category": "Web Full-Stack",
+    "items": ["Next.js 15", "React 19", "Astro", "Prisma 7", "Tailwind v4", "Framer Motion", "Cloudflare"]
+  },
+  {
+    "category": "RF & Embedded",
+    "items": ["ESP32 Firmware", "WiFi CSI Sensing", "Rust DSP (18 µs)", "MuJoCo Robotics", "Stable-Baselines3", "PPO"]
   },
   {
     "category": "Design",
-    "items": ["UI Design", "Figma", "Typography", "Color Theory", "Motion Design", "Dark Aesthetics", "Brand Identity"]
+    "items": ["Dark Aesthetics", "Terminal/Cyberpunk", "Typography", "Motion Design", "UI/UX", "Hacker Visual ID"]
   },
   {
-    "category": "Languages",
-    "items": ["JavaScript", "TypeScript", "Python", "C/C++", "CSS", "Bash"]
+    "category": "Game Dev",
+    "items": ["Canvas API", "MediaPipe Hands", "Godot 4 (GDScript)", "WPF .NET 8", "UE4SS Modding"]
   },
   {
-    "category": "Tools",
-    "items": ["VS Code", "Figma", "Git", "Photoshop", "After Effects", "Node.js"]
+    "category": "Infrastructure",
+    "items": ["Docker", "CI/CD", "SSH Tunneling", "PM2/Systemd", "SFTP Deploy", "Network Config"]
   }
 ]

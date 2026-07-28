@@ -8,26 +8,30 @@
     <h2 class="section-title reveal">WHO IS<br />BLACKPAW</h2>
     <div class="about-bio reveal">
       <p>
-        Vibe coder and designer. I build things by feel — dark aesthetics,
-        clean interactions, and interfaces that actually look like something.
+        Offensive security operator and toolsmith. I build things that break
+        other things — then write about how they worked.
       </p>
       <p>
-        I care more about how something feels than how it's categorized.
-        If it looks good, runs smooth, and has a personality — that's the goal.
+        Windows internals mods (Windhawk), web tools, RF sensing platforms,
+        and autonomous infra. Self-taught, production-depth, solo.
+      </p>
+      <p>
+        Dark aesthetics, clean interactions, and tools that actually do
+        something. If it runs smooth and has teeth — that's the goal.
       </p>
     </div>
     <div class="about-stats reveal">
       <div class="stat">
-        <span class="stat-num" id="stat-cves">0</span>
-        <span class="stat-label">Projects Built</span>
+        <span class="stat-num" id="stat-projects">12</span>
+        <span class="stat-label">Projects</span>
       </div>
       <div class="stat">
-        <span class="stat-num" id="stat-tools">0</span>
-        <span class="stat-label">Tools Released</span>
+        <span class="stat-num" id="stat-tools">8</span>
+        <span class="stat-label">Tools Shipped</span>
       </div>
       <div class="stat">
-        <span class="stat-num" id="stat-writeups">0</span>
-        <span class="stat-label">Designs</span>
+        <span class="stat-num" id="stat-writeups">3</span>
+        <span class="stat-label">Writeups</span>
       </div>
     </div>
   </div>
@@ -69,10 +73,18 @@
     color: var(--muted);
     margin-top: 6px;
   }
+
+  @media (max-width: 600px) {
+    .about-bio p { font-size: 16px; }
+    .about-stats { gap: 24px; flex-wrap: wrap; }
+    .stat-num { font-size: 36px; }
+  }
 </style>
 
 <script>
+  const STATS = { projects: 12, tools: 8, writeups: 3 };
   function animateCounter(el: HTMLElement, target: number, duration: number = 1200) {
+    el.textContent = '0';
     const start = performance.now();
     const tick = (now: number) => {
       const elapsed = now - start;
@@ -82,20 +94,15 @@
     };
     requestAnimationFrame(tick);
   }
-
-  const STATS = { cves: 7, tools: 5, writeups: 3 };
-
   const statsSection = document.querySelector('.about-stats') as HTMLElement;
   let counted = false;
-
   const observer = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting && !counted) {
       counted = true;
-      animateCounter(document.getElementById('stat-cves')!, STATS.cves);
+      animateCounter(document.getElementById('stat-projects')!, STATS.projects);
       animateCounter(document.getElementById('stat-tools')!, STATS.tools);
       animateCounter(document.getElementById('stat-writeups')!, STATS.writeups);
     }
   }, { threshold: 0.5 });
-
   observer.observe(statsSection);
 </script>

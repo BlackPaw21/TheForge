@@ -1,26 +1,38 @@
 [
   {
     "year": "2026",
-    "role": "Windhawk Modding",
-    "org": "WH-mods — github.com/BlackPaw21",
-    "description": "Built a collection of Windhawk mods for Windows system customization. Focused on lightweight, targeted tweaks that change how Windows behaves under the hood."
+    "role": "Windows Internals Modding",
+    "org": "Windhawk — github.com/BlackPaw21",
+    "description": "Authored AudioSwap, MicSwitch, Net-Toggle, and MicroManager — C++ system mods using COM, Raw Input, and Win32 hooks. PRs merged to ramensoftware/windhawk-mods."
+  },
+  {
+    "year": "2026",
+    "role": "Through-Wall RF Sensing",
+    "org": "RuView — github.com/BlackPaw21",
+    "description": "Built a full ESP32-to-Rust-DSP-to-ML pipeline for presence detection, vital signs, and 17-keypoint pose estimation through walls. 55 C files of firmware, 35-crate Rust workspace at 18 µs per sample."
   },
   {
     "year": "2025",
-    "role": "SOC Assessment Platform",
-    "org": "SAP — github.com/BlackPaw21",
-    "description": "Designed and built an interactive web-based assessment application for Tier-1 SOC Analysts. Full UI, question flow, and scoring system — built to actually feel good to use."
+    "role": "Web Products & Monetization",
+    "org": "Alternify / WiseLove",
+    "description": "Launched Alternify (229+ tools directory, AdSense monetized) and developed WiseLove — a premium dating app with slow-reveal mechanics, merit-only discovery, and in-chat microtransactions."
   },
   {
     "year": "2025",
-    "role": "Network & Security Tooling",
-    "org": "TheListener — github.com/BlackPaw21",
-    "description": "Complex MITM attack tool that intercepts and reveals HTTP/HTTPS traffic on a connected network. Deep dive into packet manipulation and network-layer visibility."
+    "role": "Hand-Tracking Game Dev",
+    "org": "GestureLock — github.com/BlackPaw21",
+    "description": "5,722-line browser game using MediaPipe Hands and Canvas API. Utility AI enemies, particle VFX, XP/leveling system. Refactoring towards module-based architecture."
   },
   {
     "year": "2025",
-    "role": "CLI Tools & Utilities",
-    "org": "HellCat / KaliQuickFix / Bundler",
-    "description": "Released a wave of focused CLI tools: HellCat (hashcat shortcut for Windows), KaliQuickFix (auto-resolves common Kali apt errors), and Bundler (packages links for easy sharing)."
+    "role": "Reinforcement Learning",
+    "org": "Quadruped Scuttler — MuJoCo 3.7",
+    "description": "Trained a custom 4-legged robot from scratch using PPO via Stable-Baselines3. Four-stage curriculum with procedurally generated worlds. Documented reward-hacking exploits and entropy collapse."
+  },
+  {
+    "year": "2025",
+    "role": "Security Research Lab",
+    "org": "GhostNAS / Pwnagotchi / Wazuh",
+    "description": "Built an ARM64 mining cluster (GhostNAS), deployed Pwnagotchi on RPi 5 for WPA2 handshake capture, and runs Wazuh SIEM inside an Android Linux chroot on a rooted Galaxy A30."
   }
 ]

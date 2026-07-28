@@ -1,44 +1,50 @@
 [
   {
-    "name": "TheListener",
-    "description": "Network-layer MITM attack tool designed to intercept and reveal HTTP/HTTPS requests. Implements packet manipulation techniques for deep traffic visibility.",
-    "tags": ["python", "mitm", "offensive-security"],
-    "repo_url": "https://github.com/BlackPaw21/TheListener",
-    "stars": 0
-  },
-  {
-    "name": "SAP",
-    "description": "SOC Assessment Platform. An interactive web-based environment for training and evaluating Tier-1 SOC Analysts on incident response and log analysis workflows.",
-    "tags": ["javascript", "blue-team", "soc-ops"],
-    "repo_url": "https://github.com/BlackPaw21/SAP",
-    "stars": 0
-  },
-  {
     "name": "wh-mods",
-    "description": "Custom Windows system modifications built for the Windhawk platform. Leverages C++ and API hooking for low-level OS customization and behavior tweaks.",
+    "description": "Windhawk mod suite — AudioSwap, MicSwitch, Net-Toggle, MicroManager. C++ Windows internals mods using COM, Win32 Hooks, and Raw Input. Published upstream to ramensoftware/windhawk-mods.",
+    "tagline": "Toggle audio devices, mute mics, kill network — from the system tray, no bloat.",
     "tags": ["c++", "windows-internals", "modding"],
     "repo_url": "https://github.com/BlackPaw21/wh-mods",
     "stars": 0
   },
   {
+    "name": "Alternify",
+    "description": "Live software-alternatives directory with 229+ tools. Dark cyber aesthetic, Cloudflare edge, Google AdSense monetization. Planning Instagram automation pipeline.",
+    "tagline": "Find open-source alternatives to paid software — no fluff, just direct swaps.",
+    "tags": ["html/css", "cloudflare", "product"],
+    "repo_url": "https://github.com/BlackPaw21/alternify",
+    "stars": 0
+  },
+  {
+    "name": "WiseLove",
+    "description": "Premium dating app with slow-reveal mechanics — profile unlocks at message milestones. Merit-only discovery, in-chat date scheduler, gift sticker microtransactions. Next.js 15, Prisma 7.",
+    "tagline": "Dating where conversation unlocks profiles — not swipes.",
+    "tags": ["next.js", "typescript", "full-stack"],
+    "repo_url": "https://github.com/BlackPaw21/WiseLove",
+    "stars": 0
+  },
+  {
+    "name": "GestureLock",
+    "description": "Browser-based hand-tracking game (5,722 lines). MediaPipe Hands, Canvas API, XP/leveling system, Utility AI enemies, particle VFX, delta-time loop. Refactoring to ES6 modules.",
+    "tagline": "Defend against waves of enemies using hand gestures — no keyboard, no mouse.",
+    "tags": ["javascript", "canvas", "game-dev"],
+    "repo_url": "https://github.com/BlackPaw21/GestureLock",
+    "stars": 0
+  },
+  {
     "name": "HellCat",
-    "description": "High-performance wrapper and automation utility for HashCat on Windows. Streamlines the password recovery and cryptographic auditing workflow.",
-    "tags": ["python", "hashcat", "cryptography"],
+    "description": "High-performance HashCat automation suite for Windows. Streamlines password recovery and cryptographic auditing workflows with batch orchestration and result parsing.",
+    "tagline": "One-command hash cracking on Windows — batch, watch, collect results.",
+    "tags": ["python", "hashcat", "offensive-security"],
     "repo_url": "https://github.com/BlackPaw21/HellCat",
     "stars": 0
   },
   {
-    "name": "KaliQuickFix",
-    "description": "Automated system recovery script for Kali Linux. Resolves common apt dependency errors and package-management conflicts automatically.",
-    "tags": ["bash", "linux", "automation"],
-    "repo_url": "https://github.com/BlackPaw21/KaliQuickFix",
-    "stars": 0
-  },
-  {
-    "name": "Bundler",
-    "description": "A universal link bundling and sharing utility. Designed for rapid resource packaging and efficient distribution of project assets.",
-    "tags": ["python", "utility", "productivity"],
-    "repo_url": "https://github.com/BlackPaw21/Bundler",
+    "name": "RuView",
+    "description": "Through-wall spatial intelligence platform. ESP32 CSI firmware (55 C files), 35-crate Rust DSP pipeline (18 µs), Python ML pipeline. Presence, vitals, fall detection, 17-keypoint pose estimation.",
+    "tagline": "See through walls with WiFi signals — presence, breathing, pose estimation.",
+    "tags": ["rust", "esp-idf", "ai/ml"],
+    "repo_url": "https://github.com/BlackPaw21/RuView",
     "stars": 0
   }
 ]

@@ -55,4 +55,11 @@ import skills from '../data/skills.json';
     border-color: var(--text);
     color: var(--text);
   }
+
+  @media (max-width: 600px) {
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+    .skill-group { padding: 20px; }
+  }
 </style>

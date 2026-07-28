@@ -1,121 +1,376 @@
 ---
-// src/components/Hero.astro
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<section id="hero" class="hero">
-  <div class="container hero-inner">
-    <div class="hero-tag reveal">SYS://FORGE.LOCAL</div>
-    <h1 class="hero-name">
-      <span id="scramble-target" data-text="BLACKPAW">BLACKPAW</span><span class="hero-name-suffix reveal">'S</span>
-    </h1>
-    <p class="hero-role reveal">FORGE</p>
-    <div class="hero-divider reveal"></div>
-    <p class="hero-tagline reveal">
-      Vibe coder. Designer. Building things that look good<br />
-      and feel right.
-    </p>
-    <div class="hero-actions reveal">
-      <a href="#arsenal" class="btn">VIEW ARSENAL</a>
-      <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/writeups`} class="btn btn--ghost">WRITEUPS →</a>
+<section id="hero">
+  <!-- Terminal Boot Sequence -->
+  <div id="terminal-boot">
+    <div class="boot-window">
+      <div class="boot-titlebar">
+        <span class="boot-dot boot-dot--red"></span>
+        <span class="boot-dot boot-dot--yellow"></span>
+        <span class="boot-dot boot-dot--green"></span>
+        <span class="boot-title">forge-boot</span>
+      </div>
+      <div class="boot-content" id="boot-content">
+        <div id="boot-lines"></div>
+        <div id="boot-prompt" class="boot-prompt hidden">
+          <span class="prompt-text">root@forge:~$ </span>
+          <span class="prompt-cursor blink">▊</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Content (shown after boot) -->
+  <div id="hero-content" class="hidden">
+    <div class="container hero-inner">
+      <div class="hero-tag reveal" data-delay="0">SYS://FORGE.LOCAL</div>
+      <h1 class="hero-name" id="hero-headline">
+        <span class="glitch-text" id="glitch-name" data-text="BLACKPAW'S">BLACKPAW'S</span>
+      </h1>
+      <p class="hero-role glitch-text" id="hero-forge" data-text="FORGE">FORGE</p>
+      <div class="hero-reveal" data-delay="1">
+        <p class="hero-tagline">
+          Offensive security research, tools, and writeups.<br />
+          Vibe coder. Designer. Breaking things.
+        </p>
+        <div class="hero-actions">
+          <a href="#arsenal" class="btn btn--primary">VIEW ARSENAL →</a>
+          <a href={`${base}/writeups`} class="btn btn--ghost">WRITEUPS →</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .hero {
+  #hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: var(--nav-height);
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
   }
+
+  /* ── Terminal Boot ────────────────────────────── */
+  #terminal-boot {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: opacity 600ms ease;
+    padding: 24px;
+  }
+  #terminal-boot.done {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .boot-window {
+    width: 100%;
+    max-width: 640px;
+    border: 1px solid var(--border);
+    background: rgba(5, 5, 5, 0.95);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    overflow: hidden;
+  }
+
+  .boot-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .boot-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .boot-dot--red { background: #ff5f56; }
+  .boot-dot--yellow { background: #ffbd2e; }
+  .boot-dot--green { background: #27c93f; }
+
+  .boot-title {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-left: 4px;
+    text-transform: uppercase;
+  }
+
+  .boot-content {
+    padding: 20px 24px;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .boot-line {
+    color: var(--muted);
+    line-height: 1.8;
+    min-height: 1.8em;
+    white-space: pre-wrap;
+    font-weight: 500;
+  }
+
+  .boot-line .ok {
+    color: #27c93f;
+  }
+
+  .boot-line .welcome {
+    color: var(--text);
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+
+  .boot-line .divider {
+    color: var(--border);
+  }
+
+  .boot-prompt {
+    margin-top: 12px;
+  }
+  .boot-prompt .prompt-text {
+    color: var(--blood);
+    font-weight: 700;
+  }
+  .boot-prompt .prompt-cursor {
+    color: var(--text);
+    animation: blink 1s step-end infinite;
+  }
+
+  .hidden { display: none; }
+
+  /* ── Hero Content ─────────────────────────────── */
+  #hero-content {
+    width: 100%;
+    z-index: 1;
+    opacity: 0;
+  }
+  #hero-content.show {
+    animation: heroEntry 800ms ease forwards;
+  }
+
+  @keyframes heroEntry {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .hero-inner {
-    padding: 80px 0;
+    padding: 60px 0;
   }
   .hero-tag {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 4px;
     color: var(--blood);
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    opacity: 0;
+    transition: opacity 400ms ease;
   }
+  .hero-tag.visible { opacity: 1; }
+
   .hero-name {
     font-family: var(--font-display);
-    font-size: clamp(72px, 14vw, 160px);
-    letter-spacing: 6px;
+    font-size: clamp(72px, 15vw, 200px);
+    letter-spacing: 4px;
     color: var(--text);
-    line-height: 0.9;
+    line-height: 0.85;
   }
-  .hero-name-suffix {
-    font-family: var(--font-display);
-    font-size: clamp(72px, 14vw, 160px);
-    letter-spacing: 6px;
-    color: var(--blood);
-    line-height: 0.9;
-  }
+
   .hero-role {
     font-family: var(--font-display);
-    font-size: clamp(36px, 7vw, 80px);
-    letter-spacing: 6px;
+    font-size: clamp(40px, 8vw, 100px);
+    letter-spacing: 10px;
     color: var(--blood);
     line-height: 1;
-    margin-top: 4px;
+    margin-top: 0;
+    text-shadow: 0 0 15px rgba(255, 32, 32, 0.25),
+                 0 0 40px rgba(255, 32, 32, 0.1);
+    position: relative;
+    z-index: 2;
   }
-  .hero-divider {
-    width: 60px;
-    height: 2px;
-    background: var(--blood);
-    margin: 32px 0;
-  }
+
   .hero-tagline {
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 500;
     color: var(--muted);
     line-height: 1.8;
-    margin-bottom: 40px;
+    max-width: 520px;
+    margin-top: 24px;
+    margin-bottom: 28px;
   }
+
   .hero-actions {
     display: flex;
-    gap: 16px;
+    gap: 12px;
     flex-wrap: wrap;
+  }
+  .hero-actions .btn {
+    padding: 14px 32px;
+    font-size: 12px;
+    letter-spacing: 3px;
+  }
+  .btn--primary {
+    background: var(--blood-dark);
+    color: var(--void);
+    border-color: var(--blood-dark);
+    font-weight: 700;
+  }
+  .btn--primary:hover {
+    background: transparent;
+    color: var(--blood);
+  }
+
+  .hero-reveal {
+    opacity: 0;
+    transition: opacity 400ms ease, transform 400ms ease;
+    transform: translateY(10px);
+  }
+  .hero-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 600px) {
+    .boot-content { padding: 16px; font-size: 12px; min-height: 200px; }
+    .hero-name { font-size: clamp(48px, 14vw, 80px); letter-spacing: 4px; }
+    .hero-role { font-size: clamp(28px, 7vw, 40px); letter-spacing: 6px; }
+    .hero-tagline { font-size: 14px; }
   }
 </style>
 
 <script>
-  // Text scramble: randomize characters then resolve to real text
-  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
+  const CHARS_PER_SEC = 72;
+  const LINE_DELAY = 150;
 
-  function scramble(el: HTMLElement, finalText: string) {
-    let iteration = 0;
-    const totalFrames = finalText.length * 4;
+  const bootLines = [
+    { text: '[  OK  ]  Initializing forge kernel v2.3.7 — x86_64', cls: 'ok' },
+    { text: '[  OK  ]  Mounting /proc security filesystem', cls: 'ok' },
+    { text: '[  OK  ]  Loading security modules (SELinux, AppArmor)', cls: 'ok' },
+    { text: '[  OK  ]  Establishing encrypted channel on port 443', cls: 'ok' },
+    { text: '[  OK  ]  Starting @blackpaw environment', cls: 'ok' },
+    { text: '────────────────────────────────────────────', cls: 'divider' },
+    { text: '   >>  BLACKPAW\'S FORGE v2.3.7  <<', cls: 'welcome' },
+    { text: '   >>  Type help for available commands  <<', cls: 'welcome' },
+  ];
 
-    const interval = setInterval(() => {
-      el.textContent = finalText
-        .split('')
-        .map((char, i) => {
-          if (i < Math.floor(iteration / 4)) return char;
-          return CHARS[Math.floor(Math.random() * CHARS.length)];
-        })
-        .join('');
+  async function bootSequence() {
+    const container = document.getElementById('boot-lines')!;
 
-      if (iteration >= totalFrames) {
-        el.textContent = finalText;
-        clearInterval(interval);
+    for (const line of bootLines) {
+      const el = document.createElement('div');
+      el.className = 'boot-line';
+      container.appendChild(el);
+
+      if (line.cls === 'divider') {
+        el.innerHTML = `<span class="divider">${line.text}</span>`;
+        await sleep(LINE_DELAY);
+        continue;
       }
-      iteration++;
-    }, 30);
+
+      if (line.cls === 'welcome') {
+        el.innerHTML = `<span class="welcome">${line.text}</span>`;
+        await sleep(LINE_DELAY);
+        continue;
+      }
+
+      // Type out the line character by character
+      let typed = 0;
+      const prefix = `<span class="ok">`;
+      const suffix = `</span>`;
+
+      await new Promise<void>(resolve => {
+        const interval = setInterval(() => {
+          typed++;
+          const displayText = line.text.slice(0, typed);
+          el.innerHTML = displayText.startsWith('[  OK  ]')
+            ? prefix + displayText + suffix
+            : displayText;
+          if (typed >= line.text.length) {
+            clearInterval(interval);
+            resolve();
+          }
+        }, 1000 / CHARS_PER_SEC);
+      });
+
+      await sleep(LINE_DELAY);
+    }
+
+    // Show prompt
+    const prompt = document.getElementById('boot-prompt')!;
+    prompt.classList.remove('hidden');
+
+    // Wait, then fade boot and show hero
+    await sleep(850);
+
+    const boot = document.getElementById('terminal-boot')!;
+    boot.classList.add('done');
+
+    const heroContent = document.getElementById('hero-content')!;
+    heroContent.classList.remove('hidden');
+    // Trigger reflow for animation
+    void heroContent.offsetWidth;
+    heroContent.classList.add('show');
+
+    // Stagger reveal of child elements
+    const tag = heroContent.querySelector('.hero-tag');
+    if (tag) setTimeout(() => tag.classList.add('visible'), 100);
+
+    const reveals = heroContent.querySelectorAll('.hero-reveal');
+    reveals.forEach((el) => {
+      const delay = parseInt(el.getAttribute('data-delay') || '0') * 200 + 600;
+      setTimeout(() => el.classList.add('visible'), delay);
+    });
+
+    // Glitch effect on name after entry
+    const glitchEl = document.getElementById('glitch-name');
+    const forgeEl = document.getElementById('hero-forge');
+    if (glitchEl) {
+      setTimeout(() => {
+        glitchEl.classList.add('glitching');
+        setTimeout(() => glitchEl.classList.remove('glitching'), 1000);
+      }, 1200);
+    }
+
+    // Periodic glitch loop on FORGE
+    if (forgeEl) {
+      setTimeout(() => {
+        function forgeGlitch() {
+          forgeEl.classList.add('glitching');
+          setTimeout(() => forgeEl.classList.remove('glitching'), 600);
+        }
+        forgeGlitch();
+        setInterval(forgeGlitch, 8000 + Math.random() * 4000);
+      }, 3000);
+    }
   }
 
-  // Fire once after a short delay
-  const target = document.getElementById('scramble-target') as HTMLElement;
-  const finalText = target.dataset.text ?? target.textContent ?? '';
-  target.textContent = '';
+  function sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
-  setTimeout(() => {
-    scramble(target, finalText);
-    // Trigger reveal on elements that don't need to wait
-    document.querySelectorAll('.hero .reveal').forEach(el => {
-      setTimeout(() => el.classList.add('visible'), 400);
-    });
-  }, 300);
+  // Start boot after page paint
+  if (document.readyState === 'complete') {
+    bootSequence();
+  } else {
+    window.addEventListener('load', bootSequence);
+  }
 </script>

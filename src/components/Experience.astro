@@ -41,38 +41,60 @@ import experience from '../data/experience.json';
   .timeline-entry {
     display: grid;
     grid-template-columns: 1fr 24px 1fr;
-    align-items: center;
+    align-items: start;
     gap: 24px;
     margin-bottom: 48px;
     position: relative;
   }
   .timeline-dot {
-    width: 10px; height: 10px;
+    width: 12px; height: 12px;
     background: var(--blood);
     border: 2px solid var(--void);
     outline: 1px solid var(--blood);
     border-radius: 50%;
     z-index: 1;
     justify-self: center;
+    margin-top: 6px;
+    box-shadow: 0 0 8px rgba(255, 32, 32, 0.3);
+    transition: box-shadow 200ms ease;
   }
-  .timeline-entry.left .timeline-year { text-align: right; }
-  .timeline-entry.left .timeline-content { grid-column: 3; }
-  .timeline-entry.left .timeline-year { grid-column: 1; }
-  .timeline-entry.left .timeline-dot { grid-column: 2; }
-  .timeline-entry.right { direction: rtl; }
-  .timeline-entry.right > * { direction: ltr; }
+  .timeline-entry:hover .timeline-dot {
+    box-shadow: 0 0 16px rgba(255, 32, 32, 0.6);
+  }
+  .timeline-entry.left  .timeline-year    { grid-column: 1; text-align: right; }
+  .timeline-entry.left  .timeline-dot     { grid-column: 2; }
+  .timeline-entry.left  .timeline-content { grid-column: 3; }
+  .timeline-entry.right .timeline-year    { grid-column: 3; }
+  .timeline-entry.right .timeline-dot     { grid-column: 2; }
+  .timeline-entry.right .timeline-content { grid-column: 1; }
 
   .timeline-year {
     font-family: var(--font-display);
-    font-size: 36px;
+    font-size: 40px;
     color: var(--blood);
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    filter: drop-shadow(0 0 6px rgba(255, 32, 32, 0.2));
   }
   .timeline-content {
     background: var(--surface);
     border: 1px solid var(--border);
-    padding: 20px;
+    padding: 20px 24px;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+    position: relative;
   }
+  .timeline-content::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: var(--blood);
+    transition: width 200ms ease;
+  }
+  .timeline-entry:hover .timeline-content {
+    border-color: var(--blood);
+    box-shadow: 0 0 20px rgba(255, 32, 32, 0.06);
+  }
+  .timeline-entry:hover .timeline-content::before { width: 2px; }
   .timeline-role {
     font-family: var(--font-display);
     font-size: 18px;
@@ -81,16 +103,16 @@ import experience from '../data/experience.json';
     margin-bottom: 4px;
   }
   .timeline-org {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--blood);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   .timeline-desc {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 500;
     color: var(--muted);
     line-height: 1.7;
   }
@@ -99,10 +121,13 @@ import experience from '../data/experience.json';
     .timeline-line { left: 10px; }
     .timeline-entry {
       grid-template-columns: 20px 1fr;
-      direction: ltr !important;
     }
     .timeline-year { display: none; }
-    .timeline-dot { grid-column: 1; }
+    .timeline-dot { grid-column: 1; margin-top: 2px; }
     .timeline-content { grid-column: 2; }
+    .timeline-entry.left .timeline-year,
+    .timeline-entry.right .timeline-year { grid-column: 3; }
+    .timeline-entry.right .timeline-content { grid-column: 2; }
+    .timeline-entry.right .timeline-year { display: none; }
   }
 </style>

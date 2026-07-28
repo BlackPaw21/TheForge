@@ -11,21 +11,36 @@
       idea — welcome.
     </p>
     <div class="contact-links reveal">
-      <a href="https://ko-fi.com/blackpaw21" target="_blank" rel="noopener" class="contact-link">
-        <span class="contact-link-label">Support</span>
-        <span class="contact-link-handle">Buy me a coffee</span>
-        <span class="contact-link-arrow">☕</span>
-      </a>
       <a href="https://github.com/BlackPaw21" target="_blank" rel="noopener" class="contact-link">
-        <span class="contact-link-label">GitHub</span>
+        <span class="contact-link-prompt">$</span>
+        <span class="contact-link-label">github</span>
         <span class="contact-link-handle">@BlackPaw21</span>
         <span class="contact-link-arrow">→</span>
       </a>
       <button class="contact-link email-copy" data-email="almogpian21@gmail.com" type="button">
-        <span class="contact-link-label">Email</span>
+        <span class="contact-link-prompt">$</span>
+        <span class="contact-link-label">email</span>
         <span class="contact-link-handle">almogpian21@gmail.com</span>
-        <span class="contact-link-arrow copy-hint">CLICK TO COPY</span>
+        <span class="contact-link-arrow copy-hint">[COPY]</span>
       </button>
+      <a href="https://www.linkedin.com/in/blackpaw21/" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-link-prompt">$</span>
+        <span class="contact-link-label">linkedin</span>
+        <span class="contact-link-handle">@blackpaw21</span>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="https://x.com/blackpaw21" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-link-prompt">$</span>
+        <span class="contact-link-label">x / twitter</span>
+        <span class="contact-link-handle">@BlackPaw21</span>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="https://ko-fi.com/blackpaw21" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-link-prompt">$</span>
+        <span class="contact-link-label">donate</span>
+        <span class="contact-link-handle">ko-fi.com/blackpaw21</span>
+        <span class="contact-link-arrow">→</span>
+      </a>
     </div>
   </div>
 </section>
@@ -42,22 +57,23 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    max-width: 480px;
+    max-width: 520px;
   }
   .contact-link {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 18px 20px;
+    gap: 12px;
+    padding: 16px 20px;
     background: var(--surface);
     border: 1px solid var(--border);
-    transition: border-color 100ms, background 100ms;
+    transition: border-color 200ms ease, background 200ms ease, box-shadow 200ms ease;
     position: relative;
     width: 100%;
     text-align: left;
     font-family: var(--font-mono);
     color: inherit;
     text-decoration: none;
+    font-size: 14px;
   }
   .contact-link::before {
     content: '';
@@ -65,32 +81,37 @@
     left: 0; top: 0; bottom: 0;
     width: 0;
     background: var(--blood);
-    transition: width 100ms;
+    transition: width 200ms ease;
   }
   .contact-link:hover {
     border-color: var(--blood);
     background: var(--elevated);
+    box-shadow: 0 0 20px rgba(255, 32, 32, 0.06);
   }
-  .contact-link:hover::before { width: 3px; }
-  .contact-link-label {
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+  .contact-link:hover::before { width: 2px; }
+
+  .contact-link-prompt {
     color: var(--blood);
-    min-width: 100px;
+    font-weight: 700;
+    min-width: 16px;
+  }
+  .contact-link-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    min-width: 88px;
   }
   .contact-link-handle {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--muted);
+    font-weight: 500;
+    color: var(--text);
     flex: 1;
-    padding: 0 16px;
   }
   .contact-link-arrow {
     color: var(--muted);
-    font-size: 14px;
-    transition: transform 100ms, color 100ms;
+    font-size: 12px;
+    transition: transform 200ms ease, color 200ms ease;
   }
   .contact-link:hover .contact-link-arrow {
     transform: translateX(4px);
@@ -99,13 +120,22 @@
   .copy-hint {
     font-size: 9px;
     letter-spacing: 2px;
+    color: var(--muted);
     transform: none !important;
   }
   .email-copy.copied {
     border-color: var(--blood);
+    box-shadow: 0 0 20px rgba(255, 32, 32, 0.1);
   }
   .email-copy.copied .copy-hint {
     color: var(--blood);
+  }
+
+  @media (max-width: 600px) {
+    .contact-link { padding: 14px 16px; gap: 8px; font-size: 13px; }
+    .contact-link-label { min-width: 0; display: none; }
+    .contact-link-handle { font-size: 13px; }
+    .contact-sub { font-size: 16px; }
   }
 </style>
 

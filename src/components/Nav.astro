@@ -11,7 +11,7 @@ const links = [
 
 <nav id="nav">
   <div class="container nav-inner">
-    <a href={base || '/'} class="nav-logo">BLACKPAW<span>.</span></a>
+    <a href={base || '/'} class="nav-logo"><span class="nav-prompt">root@forge</span><span class="nav-sep">:</span><span class="nav-path">~</span><span class="nav-dollar">$</span> BLACKPAW<span class="nav-dot">.</span><span class="nav-cursor blink">▊</span></a>
 
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -45,54 +45,56 @@ const links = [
     height: 100%;
   }
   .nav-logo {
-    font-family: var(--font-display);
-    font-size: 22px;
-    letter-spacing: 3px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 1px;
     color: var(--text);
     transition: color 100ms;
+    font-weight: 700;
   }
-  .nav-logo span { 
-    color: var(--blood); 
-    transition: color 100ms;
-  }
-  .nav-logo:hover,
-  .nav-logo:hover span {
-    color: var(--blood);
-  }
+  .nav-prompt { color: var(--blood); }
+  .nav-sep { color: var(--muted); }
+  .nav-path { color: var(--blood-dark); }
+  .nav-dollar { color: var(--blood); margin-right: 8px; }
+  .nav-dot { color: var(--blood); transition: color 100ms; }
+  .nav-cursor { color: var(--text); font-size: 11px; margin-left: 1px; animation: blink 1s step-end infinite; }
+  .nav-logo:hover .nav-dot { color: var(--text); }
   .nav-links {
     display: flex;
     gap: 32px;
     list-style: none;
   }
   .nav-link {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--text);
+    color: var(--muted);
     transition: color 100ms;
     position: relative;
+    padding: 4px 0;
   }
   .nav-link span {
     color: var(--blood);
     transition: color 100ms;
   }
   .nav-link:hover,
-  .nav-link.active,
-  .nav-link:hover span,
-  .nav-link.active span {
-    color: var(--blood);
+  .nav-link.active {
+    color: var(--text);
   }
-  .nav-link::before {
+  .nav-link::after {
     content: '';
     position: absolute;
-    left: -8px; top: 50%;
-    transform: translateY(-50%);
-    width: 0; height: 100%;
+    left: 0; bottom: 0;
+    width: 0;
+    height: 1px;
     background: var(--blood);
-    transition: width 100ms;
+    transition: width 200ms ease;
   }
-  .nav-link.active::before { width: 3px; }
+  .nav-link:hover::after,
+  .nav-link.active::after { width: 100%; }
+  .nav-link:hover span,
+  .nav-link.active span { color: var(--blood); }
   .nav-toggle {
     display: none;
     flex-direction: column;
