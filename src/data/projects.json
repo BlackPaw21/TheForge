@@ -1,7 +1,7 @@
 [
   {
     "name": "wh-mods",
-    "description": "Windhawk mod suite — AudioSwap, MicSwitch, Net-Toggle, MicroManager. C++ Windows internals mods using COM, Win32 Hooks, and Raw Input. Published upstream to ramensoftware/windhawk-mods.",
+    "description": "Windhawk mod suite — AudioSwap, MicSwitch, Net-Toggle, MicroManager, Bt Battery Monitor. C++ Windows internals mods using COM, Win32 hooks, and Raw Input. 20 PRs merged upstream to ramensoftware/windhawk-mods.",
     "tagline": "Toggle audio devices, mute mics, kill network — from the system tray, no bloat.",
     "tags": ["c++", "windows-internals", "modding"],
     "repo_url": "https://github.com/BlackPaw21/wh-mods",
@@ -9,42 +9,50 @@
   },
   {
     "name": "Alternify",
-    "description": "Live software-alternatives directory with 229+ tools. Dark cyber aesthetic, Cloudflare edge, Google AdSense monetization. Planning Instagram automation pipeline.",
+    "description": "Live software-alternatives directory with 5,000+ alternatives. Dark cyber aesthetic, Cloudflare edge, AdSense + Ezoic monetization.",
     "tagline": "Find open-source alternatives to paid software — no fluff, just direct swaps.",
     "tags": ["html/css", "cloudflare", "product"],
-    "repo_url": "https://github.com/BlackPaw21/alternify",
-    "stars": 0
-  },
-  {
-    "name": "WiseLove",
-    "description": "Premium dating app with slow-reveal mechanics — profile unlocks at message milestones. Merit-only discovery, in-chat date scheduler, gift sticker microtransactions. Next.js 15, Prisma 7.",
-    "tagline": "Dating where conversation unlocks profiles — not swipes.",
-    "tags": ["next.js", "typescript", "full-stack"],
-    "repo_url": "https://github.com/BlackPaw21/WiseLove",
-    "stars": 0
-  },
-  {
-    "name": "GestureLock",
-    "description": "Browser-based hand-tracking game (5,722 lines). MediaPipe Hands, Canvas API, XP/leveling system, Utility AI enemies, particle VFX, delta-time loop. Refactoring to ES6 modules.",
-    "tagline": "Defend against waves of enemies using hand gestures — no keyboard, no mouse.",
-    "tags": ["javascript", "canvas", "game-dev"],
-    "repo_url": "https://github.com/BlackPaw21/GestureLock",
+    "repo_url": "https://alternify.online/",
     "stars": 0
   },
   {
     "name": "HellCat",
-    "description": "High-performance HashCat automation suite for Windows. Streamlines password recovery and cryptographic auditing workflows with batch orchestration and result parsing.",
-    "tagline": "One-command hash cracking on Windows — batch, watch, collect results.",
+    "description": "High-performance HashCat automation suite for Windows. Streamlines WPA-PMKID/EAPOL password recovery with interactive mode selection and batch orchestration.",
+    "tagline": "One-command WPA hash cracking on Windows — batch, watch, collect results.",
     "tags": ["python", "hashcat", "offensive-security"],
     "repo_url": "https://github.com/BlackPaw21/HellCat",
     "stars": 0
   },
   {
-    "name": "RuView",
-    "description": "Through-wall spatial intelligence platform. ESP32 CSI firmware (55 C files), 35-crate Rust DSP pipeline (18 µs), Python ML pipeline. Presence, vitals, fall detection, 17-keypoint pose estimation.",
-    "tagline": "See through walls with WiFi signals — presence, breathing, pose estimation.",
-    "tags": ["rust", "esp-idf", "ai/ml"],
-    "repo_url": "https://github.com/BlackPaw21/RuView",
+    "name": "TheListener",
+    "description": "MITM attack automation suite — Bettercap, Nmap, and Scapy. Monitor, fingerprint, and intercept HTTP/HTTPS traffic across the local network.",
+    "tagline": "See every HTTP/HTTPS request on your network — revealed live.",
+    "tags": ["python", "bettercap", "offensive-security"],
+    "repo_url": "https://github.com/BlackPaw21/TheListener",
+    "stars": 0
+  },
+  {
+    "name": "SAP",
+    "description": "SOC Analyst Professional training platform — interactive assessment for Tier-1 analysts. 300+ questions across 7 security domains, 90-minute exam, zero backend.",
+    "tagline": "Train Tier-1 SOC analysts: 300 questions, 7 domains, one 90-minute exam.",
+    "tags": ["web", "security", "training"],
+    "repo_url": "https://github.com/BlackPaw21/SAP",
+    "stars": 0
+  },
+  {
+    "name": "TerminalLife",
+    "description": "GPU-accelerated evolution simulator — creatures with neural-network brains and genetic algorithms compete, hunt, and survive in your Windows terminal. PyTorch + CUDA.",
+    "tagline": "Watch autonomous creatures evolve, hunt, and survive in your terminal.",
+    "tags": ["python", "pytorch", "ai"],
+    "repo_url": "https://github.com/BlackPaw21/TerminalLife",
+    "stars": 0
+  },
+  {
+    "name": "Bundler",
+    "description": "Universal link bundler with metadata fetching — title, image, and price grabbed automatically. Flask-based bundle manager with view and edit.",
+    "tagline": "Bundle links into shareable pages — titles, previews, prices auto-fetched.",
+    "tags": ["python", "flask", "utility"],
+    "repo_url": "https://github.com/BlackPaw21/Bundler",
     "stars": 0
   }
 ]

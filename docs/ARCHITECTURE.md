@@ -22,9 +22,12 @@ src/
 │   ├── DemoTerminal.astro   # Interactive HellCat terminal demo
 │   ├── Experience.astro     # Timeline component
 │   ├── Skills.astro         # Skill category grid from JSON
-│   └── Contact.astro        # Terminal-style contact links
+│   ├── Contact.astro        # Terminal-style contact links
+│   └── originkit/
+│       ├── chromatic-waves.tsx # WebGL background (React + ogl, Originkit)
+│       └── encrypt-button.tsx  # Scramble/sweep CTA button (React + framer-motion, Originkit)
 ├── layouts/
-│   └── Base.astro           # HTML shell, canvas grid, CRT overlays, cursor
+│   └── Base.astro           # HTML shell, waves background, CRT overlays, cursor
 ├── pages/
 │   └── index.astro          # Page composition
 ├── styles/
@@ -43,8 +46,8 @@ src/
 
 | Token | Value | Usage |
 |---|---|---|
-| `--void` | `#050505` | Page background |
-| `--surface` | `#0d0d0d` | Card/window backgrounds |
+| `--void` | `#0d0d0d` | Page background (matches waves bg) |
+| `--surface` | `#111111` | Card/window backgrounds |
 | `--elevated` | `#151515` | Hover state surfaces |
 | `--blood` | `#ff2020` | Primary accent, text highlights |
 | `--blood-dark` | `#cc1a1a` | Button fills, scrollbars |
@@ -63,7 +66,8 @@ src/
 - **CRT Scanlines:** Fixed overlay, repeating linear gradient, 4s breathing pulse
 - **Grain Noise:** 256x256 random noise canvas, tiled, 2.5% opacity
 - **Vignette:** Radial gradient from transparent center to black edges
-- **Grid Background:** Canvas-rendered 48px grid with glowing red intersection points, subtle drift animation
+- **Chromatic Waves Background:** WebGL (React + ogl) perlin-noise wave field rendered as a dot-matrix palette; full-page layer spanning the document height (body is the positioning context), re-sized via ResizeObserver and scrolls with the page (Originkit component; themed props: `bgColor` `#0d0d0d`, palette `['#6B0000']`, `frequency` 10, `gamma` 10, `paletteBias` -4, `cellSize` 10 — sparse 1–2px dots with the wave reading as dot-density clusters; the noise render target is clamped to 4096px per side — the WebGL1 spec-minimum — so the full-page canvas stays within GPU texture/renderbuffer limits, including retina-scale canvases)
+- **Encrypt Button CTA:** React + framer-motion scramble-on-hover button used for the hero "VIEW ARSENAL →" action (Originkit component; themed props: fill `#cc1a1a`, hover fill transparent, text `#0d0d0d` → `#ff2020` on hover, 4px `#C80000` border, rounded 25, JetBrains Mono 700 24px, sweep disabled; colors revert instantly on mouse-leave — `transition: { duration: 0 }` on the hover state so no animation must finish before the color returns)
 - **Custom Cursor:** 24px circle, shrinks to 6px filled dot on hover over interactive elements, smooth lerp follow
 - **Glitch Text:** CSS keyframe animation with clip-path slices and hue-shift color channels
 
@@ -89,9 +93,9 @@ Short bio positioning the operator as self-taught, production-depth solo creator
 
 ### Arsenal (`Arsenal.astro`)
 
-6 project cards in a responsive grid (auto-fill, 340px min). Each card shows:
+7 project cards in a responsive grid (auto-fill, 340px min). Each card shows:
 
-- **Index:** Zero-padded bracket number `[01]-[06]`
+- **Index:** Zero-padded bracket number `[01]-[07]`
 - **Name:** Display font project title
 - **Tagline:** Italic one-liner value proposition
 - **Description:** Technical detail
@@ -128,7 +132,7 @@ Terminal-prompt styled contact links with `$` prefix, uppercase label, handle, a
 
 Layout shell providing:
 
-- Canvas-based animated grid background (48px cells, glowing nodes)
+- Chromatic Waves WebGL background (Originkit `chromatic-waves`, React + ogl, 30fps, dpr capped at 2, render target clamped to 4096px)
 - CRT effects (scanlines with breathing animation, grain noise, vignette)
 - Custom cursor with smooth lerp and hover detection
 - Global scroll reveal via IntersectionObserver on `.reveal` elements
@@ -158,7 +162,7 @@ Layout shell providing:
 ## Data Flow
 
 All content data is stored in `src/data/*.json` files:
-- `projects.json` — 6 projects with name, description, tagline, tags, repo_url
+- `projects.json` — 7 projects with name, description, tagline, tags, repo_url
 - `skills.json` — 9 skill categories with items array
 - `experience.json` — 6 timeline entries with year, role, org, description
 

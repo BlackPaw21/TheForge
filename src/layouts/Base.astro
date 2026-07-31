@@ -1,6 +1,7 @@
 ---
 // src/layouts/Base.astro
 import Nav from '../components/Nav.astro';
+import ChromaticWaves from '../components/originkit/chromatic-waves.tsx';
 import '../styles/global.css';
 
 interface Props {
@@ -26,8 +27,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <link rel="icon" type="image/png" href={`${base}/logo.png`} />
 </head>
 <body>
-  <!-- Animated grid background -->
-  <canvas id="grid-bg" aria-hidden="true"></canvas>
+  <!-- Chromatic Waves background -->
+  <div id="waves-bg" aria-hidden="true">
+    <ChromaticWaves client:load bgColor="#0d0d0d" colors={['#6B0000']} frequency={10} gamma={10} paletteBias={-4} cellSize={10} />
+  </div>
 
   <!-- CRT effects -->
   <div id="scanlines" aria-hidden="true"></div>
@@ -72,69 +75,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </style>
 
 <script>
-  // ── Animated Grid ──────────────────────────────────
-  const canvas = document.getElementById('grid-bg') as HTMLCanvasElement;
-  const ctx = canvas.getContext('2d')!;
-  const GRID = 48;
-  const SPEED = 0.35;
-  let offset = 0;
-  let time = 0;
-
-  function resizeCanvas() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-  function drawGrid() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    time += 0.016;
-
-    const o = offset % GRID;
-    ctx.strokeStyle = '#1a1a1a';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-
-    const cols = Math.floor(canvas.width / GRID) + 2;
-    const rows = Math.floor(canvas.height / GRID) + 2;
-
-    // Grid lines
-    for (let x = o - GRID, i = 0; i < cols; x += GRID, i++) {
-      const px = Math.round(x) + 0.5;
-      ctx.moveTo(px, 0);
-      ctx.lineTo(px, canvas.height);
-    }
-    for (let y = o - GRID, i = 0; i < rows; y += GRID, i++) {
-      const py = Math.round(y) + 0.5;
-      ctx.moveTo(0, py);
-      ctx.lineTo(canvas.width, py);
-    }
-    ctx.stroke();
-
-    // Glowing intersection points
-    const pulse = Math.sin(time * 1.5) * 0.3 + 0.7;
-    for (let x = o - GRID, i = 0; i < cols; x += GRID, i++) {
-      for (let y = o - GRID, j = 0; j < rows; y += GRID, j++) {
-        const alpha = 0.08 * pulse + (Math.sin(x * 0.1 + y * 0.1 + time * 0.5) * 0.04);
-        if (alpha > 0.06) {
-          ctx.beginPath();
-          ctx.fillStyle = `rgba(255, 32, 32, ${alpha})`;
-          ctx.shadowColor = 'rgba(255, 32, 32, 0.3)';
-          ctx.shadowBlur = 6;
-          ctx.arc(x, y, 1.5, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.shadowBlur = 0;
-        }
-      }
-    }
-
-    offset += SPEED;
-    requestAnimationFrame(drawGrid);
-  }
-
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas, { passive: true });
-  drawGrid();
-
   // ── Grain Noise Overlay ────────────────────────────
   (function initGrain() {
     const grainCanvas = document.createElement('canvas');

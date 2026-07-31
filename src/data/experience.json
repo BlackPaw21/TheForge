@@ -9,13 +9,13 @@
     "year": "2026",
     "role": "Through-Wall RF Sensing",
     "org": "RuView — github.com/BlackPaw21",
-    "description": "Built a full ESP32-to-Rust-DSP-to-ML pipeline for presence detection, vital signs, and 17-keypoint pose estimation through walls. 55 C files of firmware, 35-crate Rust workspace at 18 µs per sample."
+    "description": "Built a full ESP32-to-Rust-DSP-to-ML pipeline for presence detection, vital signs, and 17-keypoint pose estimation through walls. 55 C files of firmware, 47-crate Rust workspace at 18 µs per sample."
   },
   {
-    "year": "2025",
+    "year": "2026",
     "role": "Web Products & Monetization",
     "org": "Alternify / WiseLove",
-    "description": "Launched Alternify (229+ tools directory, AdSense monetized) and developed WiseLove — a premium dating app with slow-reveal mechanics, merit-only discovery, and in-chat microtransactions."
+    "description": "Launched Alternify (5,000+ alternatives directory, AdSense + Ezoic monetized) and developed WiseLove — a premium dating app with slow-reveal mechanics, merit-only discovery, and in-chat microtransactions."
   },
   {
     "year": "2025",

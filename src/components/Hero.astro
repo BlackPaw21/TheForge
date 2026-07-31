@@ -1,3 +1,8 @@
+---
+import EncryptButton from './originkit/encrypt-button';
+import HeroTitleFX from './HeroTitleFX';
+---
+
 <section id="hero">
   <!-- Terminal Boot Sequence -->
   <div id="terminal-boot">
@@ -23,7 +28,7 @@
     <div class="container hero-inner">
       <div class="hero-tag reveal" data-delay="0">SYS://FORGE.LOCAL</div>
       <h1 class="hero-name" id="hero-headline">
-        <span class="glitch-text" id="glitch-name" data-text="BLACKPAW'S">BLACKPAW'S</span>
+        <HeroTitleFX client:load />
       </h1>
       <p class="hero-role glitch-text" id="hero-forge" data-text="FORGE">FORGE</p>
       <div class="hero-reveal" data-delay="1">
@@ -32,7 +37,30 @@
           Vibe coder. Designer. Breaking things.
         </p>
         <div class="hero-actions">
-          <a href="#arsenal" class="btn btn--primary">VIEW ARSENAL →</a>
+          <a href="#arsenal">
+            <EncryptButton
+              client:load
+              label="VIEW ARSENAL →"
+              font={{
+                fontSize: 12,
+                textAlign: 'left',
+                fontFamily: 'JetBrains Mono',
+                fontWeight: 700,
+                lineHeight: '1.2em',
+                letterSpacing: '0em',
+              }}
+              fill="#cc1a1a"
+              hoverFill="transparent"
+              textColor="#0d0d0d"
+              hoverTextColor="#ff2020"
+              paddingY={11}
+              rounded={13}
+              sweep={false}
+              border
+              borderOptions={{ color: '#C80000', width: 2 }}
+              transition={{ type: 'tween', duration: 2.4, delay: 0, ease: [0.44, 0, 0.56, 1] }}
+            />
+          </a>
         </div>
       </div>
     </div>
@@ -191,6 +219,8 @@
     letter-spacing: 4px;
     color: var(--text);
     line-height: 0.85;
+    text-shadow: 0 0 18px rgba(255, 32, 32, 0.3),
+                 0 0 70px rgba(255, 32, 32, 0.12);
   }
 
   .hero-role {
@@ -221,22 +251,6 @@
     gap: 12px;
     flex-wrap: wrap;
   }
-  .hero-actions .btn {
-    padding: 14px 32px;
-    font-size: 12px;
-    letter-spacing: 3px;
-  }
-
-  .btn--primary {
-    background: var(--blood-dark);
-    color: var(--void);
-    border-color: var(--blood-dark);
-    font-weight: 700;
-  }
-  .btn--primary:hover {
-    background: transparent;
-    color: var(--blood);
-  }
 
   .hero-reveal {
     opacity: 0;
@@ -254,7 +268,6 @@
     .hero-name { font-size: clamp(86px, 26vw, 144px); letter-spacing: 2px; }
     .hero-role { font-size: clamp(53px, 14vw, 77px); letter-spacing: 4px; }
     .hero-tagline { font-size: 14px; }
-    .hero-actions .btn { padding: 14px 24px; }
     .hero-tag { font-size: 24px; letter-spacing: 2px; }
     .boot-window { max-width: 100%; }
   }
@@ -263,7 +276,6 @@
     .hero-name { font-size: 62px; letter-spacing: 1px; }
     .hero-role { font-size: 43px; letter-spacing: 3px; }
     .hero-tagline { font-size: 12px; }
-    .hero-actions .btn { font-size: 11px; padding: 12px 16px; }
     .hero-tag { font-size: 22px; }
     .boot-content { padding: 12px 16px; font-size: 11px; min-height: 180px; }
     #terminal-boot { padding: 24px; }
@@ -353,17 +365,8 @@
       setTimeout(() => el.classList.add('visible'), delay);
     });
 
-    // Glitch effect on name after entry
-    const glitchEl = document.getElementById('glitch-name');
-    const forgeEl = document.getElementById('hero-forge');
-    if (glitchEl) {
-      setTimeout(() => {
-        glitchEl.classList.add('glitching');
-        setTimeout(() => glitchEl.classList.remove('glitching'), 1000);
-      }, 1200);
-    }
-
     // Periodic glitch loop on FORGE
+    const forgeEl = document.getElementById('hero-forge');
     if (forgeEl) {
       const forgeTarget = forgeEl;
       setTimeout(() => {

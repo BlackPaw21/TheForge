@@ -119,28 +119,28 @@
   const cmd = document.getElementById('demo-cmd')!;
   const body = document.getElementById('demo-body')!;
 
-  const COMMAND = 'hellcat --hash-mode md5 --target acme-corps-hashes.txt';
+  const COMMAND = 'hellcat -m 22000 wpa_handshake.hc22000 --attack dictionary';
   const OUTPUT = [
     '',
     '\x1b[2m╔══════════════════════════════════════╗\x1b[0m',
-    '\x1b[2m║\x1b[0m  \x1b[31mHellCat\x1b[0m v1.2 — HashCat Automation  \x1b[2m║\x1b[0m',
-    '\x1b[2m║\x1b[0m  Mode: \x1b[33mMD5\x1b[0m ($1$ salt)                \x1b[2m║\x1b[0m',
+    '\x1b[2m║\x1b[0m  \x1b[31mHellCat\x1b[0m — HashCat WPA Automation     \x1b[2m║\x1b[0m',
+    '\x1b[2m║\x1b[0m  Mode: \x1b[33mWPA-PMKID/EAPOL (-m 22000)\x1b[0m   \x1b[2m║\x1b[0m',
     '\x1b[2m║\x1b[0m  Hashes: \x1b[33m142\x1b[0m loaded, \x1b[33m0\x1b[0m skipped       \x1b[2m║\x1b[0m',
-    '\x1b[2m║\x1b[0m  Device: \x1b[33mNVIDIA RTX 4090\x1b[0m             \x1b[2m║\x1b[0m',
+    '\x1b[2m║\x1b[0m  Device: \x1b[33mGPU (Hashcat)\x1b[0m               \x1b[2m║\x1b[0m',
     '\x1b[2m╚══════════════════════════════════════╝\x1b[0m',
     '',
     'Session..........: \x1b[32mactive\x1b[0m',
-    'Speed.#1.........: \x1b[33m42.5 GH/s\x1b[0m  \x1b[2m(42.5s remaining)\x1b[0m',
+    'Speed.#1.........: \x1b[33m2.1 MH/s\x1b[0m  \x1b[2m(42.5s remaining)\x1b[0m',
     'Progress.........: \x1b[33m96/142\x1b[0m  \x1b[2m(67.61%)\x1b[0m',
     '',
     '\x1b[32m[ OK ]\x1b[0m  Cracking complete — \x1b[32m100%\x1b[0m',
-    '\x1b[32m[ OK ]\x1b[0m  \x1b[37mRecovered\x1b[0m \x1b[31m138/142\x1b[0m passwords',
-    '\x1b[32m[ OK ]\x1b[0m  Results written to \x1b[33mcracked_acme.txt\x1b[0m',
+    '\x1b[32m[ OK ]\x1b[0m  \x1b[37mRecovered\x1b[0m \x1b[31m138/142\x1b[0m WPA handshakes',
+    '\x1b[32m[ OK ]\x1b[0m  Results written to \x1b[33mcracked_wpa.txt\x1b[0m',
     '',
-    '\x1b[31mroot@forge:~$\x1b[0m \x1b[37mcat cracked_acme.txt | head -3\x1b[0m',
-    '\x1b[31madmin\x1b[0m:\x1b[33mP@ssw0rd2024!\x1b[0m',
-    '\x1b[31mroot\x1b[0m:\x1b[33mqwerty12345\x1b[0m',
-    '\x1b[31mdb_admin\x1b[0m:\x1b[33mSummer2024!\x1b[0m',
+    '\x1b[31mroot@forge:~$\x1b[0m \x1b[37mcat cracked_wpa.txt | head -3\x1b[0m',
+    '\x1b[31mHomeNet\x1b[0m:\x1b[33mSummer2024!\x1b[0m',
+    '\x1b[31mCafe_Guest\x1b[0m:\x1b[33mqwerty12345\x1b[0m',
+    '\x1b[31mOffice_WiFi\x1b[0m:\x1b[33mP@ssw0rd2024!\x1b[0m',
     '',
   ];
 

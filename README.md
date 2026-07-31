@@ -24,7 +24,7 @@ npm run preview    # preview the production build
 
 ```
 src/
-├── components/    # Hero, Nav, About, Arsenal, DemoTerminal, Experience, Skills, Contact
+├── components/    # Hero (scramble CTA), Nav, About, Arsenal, DemoTerminal, Experience, Skills, Contact, originkit/ (chromatic-waves WebGL bg, encrypt-button CTA)
 ├── layouts/       # Base.astro — HTML shell, CRT effects, custom cursor
 ├── pages/         # index.astro — single landing page
 ├── styles/        # global.css — design tokens, animations, buttons
