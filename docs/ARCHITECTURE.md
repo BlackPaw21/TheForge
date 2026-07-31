@@ -77,7 +77,7 @@ Two-phase load sequence:
 
 1. **Boot Phase:** macOS-style terminal window with traffic light dots and "forge-boot" titlebar. 8 lines of kernel boot messages typed character-by-character (72 chars/sec). Lines: OK status, kernel version, security modules, encrypted channel, environment start, divider, welcome banner.
 
-2. **Content Phase:** After 850ms pause, boot window fades out. Hero content fades in with staggered reveals: "SYS://FORGE.LOCAL" tag, "BLACKPAW'S" (15vw Bebas Neue, white, single-entry glitch animation), "FORGE" (blood red with subtle glow, periodic glitch loop every 8-12s), tagline, and two CTAs (VIEW ARSENAL filled button, WRITEUPS ghost button).
+2. **Content Phase:** After 850ms pause, boot window fades out. Hero content fades in with staggered reveals: "SYS://FORGE.LOCAL" tag, "BLACKPAW'S" (15vw Bebas Neue, white, single-entry glitch animation), "FORGE" (blood red with subtle glow, periodic glitch loop every 8-12s), tagline, and a VIEW ARSENAL CTA.
 
 ### Nav (`Nav.astro`)
 
@@ -85,7 +85,7 @@ Fixed-top bar with terminal prompt logo (`root@forge:~$ BLACKPAW.▊` with blink
 
 ### About (`About.astro`)
 
-Short bio positioning the operator as self-taught, production-depth solo creator across Windows internals, RF sensing, web tools, and autonomous infra. Three stat counters (12 Projects, 8 Tools Shipped, 3 Writeups) animating from 0 on scroll into view.
+Short bio positioning the operator as self-taught, production-depth solo creator across Windows internals, RF sensing, web tools, and autonomous infra. Two stat counters (12 Projects, 8 Tools Shipped) animating from 0 on scroll into view.
 
 ### Arsenal (`Arsenal.astro`)
 
@@ -122,7 +122,7 @@ Alternating left/right timeline with blood-red dots and hover glow. 6 entries sp
 
 ### Contact (`Contact.astro`)
 
-Terminal-prompt styled contact links with `$` prefix, uppercase label, handle, and arrow. Entries: GitHub (@BlackPaw21), Email (with COPY button using clipboard API), LinkedIn, X/Twitter, Ko-fi (donate). Hover reveals red left accent bar and arrow slide.
+Terminal-prompt styled contact links with `$` prefix, uppercase label, handle, and arrow. Entries: GitHub (@BlackPaw21), Email (with COPY button using clipboard API), Ko-fi (donate). Hover reveals red left accent bar and arrow slide.
 
 ### Base (`Base.astro`)
 

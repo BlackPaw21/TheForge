@@ -1,43 +1,42 @@
-# Astro Starter Kit: Minimal
+# BlackPaw's Forge
+
+Offensive security research, tools, and tooling — portfolio site with a terminal/boot-sequence aesthetic: blood-red-on-black CRT cyberpunk.
+
+**Live:** https://blackpaw21.github.io/TheForge/
+
+## Stack
+
+- [Astro 6](https://astro.build) — static export
+- TypeScript (strict)
+- Vanilla CSS (design tokens, no framework)
+- GitHub Pages via GitHub Actions
+
+## Development
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install        # install dependencies
+npm run dev        # dev server at localhost:4321
+npm run build      # static export to dist/
+npm run preview    # preview the production build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Structure
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+src/
+├── components/    # Hero, Nav, About, Arsenal, DemoTerminal, Experience, Skills, Contact
+├── layouts/       # Base.astro — HTML shell, CRT effects, custom cursor
+├── pages/         # index.astro — single landing page
+├── styles/        # global.css — design tokens, animations, buttons
+└── data/          # projects.json, skills.json, experience.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+All content lives in `src/data/*.json` — edit those to change projects, skills, or the timeline.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Deployment
 
-Any static assets, like images, can be placed in the `public/` directory.
+Push to `main` → `.github/workflows/deploy.yml` builds with Node 22 and deploys to GitHub Pages (base path `/TheForge/`).
 
-## 🧞 Commands
+## Design
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Full design system (tokens, effects, breakpoints, animation table) is documented in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).

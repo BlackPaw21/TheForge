@@ -1,7 +1,3 @@
----
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
----
-
 <section id="hero">
   <!-- Terminal Boot Sequence -->
   <div id="terminal-boot">
@@ -32,12 +28,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <p class="hero-role glitch-text" id="hero-forge" data-text="FORGE">FORGE</p>
       <div class="hero-reveal" data-delay="1">
         <p class="hero-tagline">
-          Offensive security research, tools, and writeups.<br />
+          Offensive security research, tools, and tooling.<br />
           Vibe coder. Designer. Breaking things.
         </p>
         <div class="hero-actions">
           <a href="#arsenal" class="btn btn--primary">VIEW ARSENAL →</a>
-          <a href={`${base}/writeups`} class="btn btn--ghost">WRITEUPS →</a>
         </div>
       </div>
     </div>
@@ -370,10 +365,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     // Periodic glitch loop on FORGE
     if (forgeEl) {
+      const forgeTarget = forgeEl;
       setTimeout(() => {
         function forgeGlitch() {
-          forgeEl.classList.add('glitching');
-          setTimeout(() => forgeEl.classList.remove('glitching'), 600);
+          forgeTarget.classList.add('glitching');
+          setTimeout(() => forgeTarget.classList.remove('glitching'), 600);
         }
         forgeGlitch();
         setInterval(forgeGlitch, 8000 + Math.random() * 4000);
